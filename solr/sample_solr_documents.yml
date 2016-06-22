@@ -128,6 +128,7 @@
   - '9645625963'
   subject_geo_facet:
   - Iran
+  geo_srpt: 'ENVELOPE(44.031891, 63.3332005, 39.781676, 25.060388565)'
   subject_topic_facet:
   - Nūrī, ʻAbd Allāh, 1949-
   - Iran. Vizārat-i Kishvar
@@ -322,6 +323,7 @@
   - "久保栄 「火山灰地」 を読む"
   subject_geo_facet:
   - Japan
+  geo_srpt: 'ENVELOPE(122.934585571, 153.987060547, 45.522888184, 20.422889709)'
   subject_topic_facet:
   - Kubo, Sakae, 1901-1958
   - Japanese drama
@@ -391,6 +393,7 @@
   - Ocherki po istorii Kazakhskoĭ SSR.
   subject_geo_facet:
   - Kazakhstan
+  geo_srpt: 'ENVELOPE(46.493672, 87.3153995, 55.441984, 40.568584)'
   author_addl_t:
   - Institut istorii (Akademii︠a︡ nauk SSSR)
   - Akademii︠a︡ nauk Kazakhskoĭ SSR, Alma Ata.
@@ -549,6 +552,7 @@
   - "高麗史. 列傅. Selections"
   subject_geo_facet:
   - Korea
+  geo_srpt: 'ENVELOPE(125.074584961, 130.950393677, 38.61841203, 33.112861633)'
   author_addl_t:
   - Yi, Min-su,
   - "李 民樹"
@@ -682,6 +686,7 @@
   - Pākistānī ʻaurat dorāhe par /
   subject_geo_facet:
   - Pakistan
+  geo_srpt: 'ENVELOPE(60.844379, 77.048971, 37.054484, 23.694525)'
   subject_topic_facet:
   - Women
   lc_alpha_facet:
@@ -1072,6 +1077,7 @@
   - "北韓　法令集　／"
   subject_geo_facet:
   - Korea (North)
+  geo_srpt: 'ENVELOPE(124.185386658, 130.699450576, 43.01159, 37.6767837072)'
   subject_topic_facet:
   - Law
   author_addl_t:
@@ -1258,6 +1264,7 @@
   subject_geo_facet:
   - Seoul (Korea)
   - Korea (South)
+  geo_srpt: 'ENVELOPE(126.776403417, 127.205530474, 37.6971755449, 37.4266035554)'
   subject_topic_facet:
   - Women
   lc_alpha_facet:
@@ -1353,6 +1360,7 @@
   id: '96933325'
   subject_geo_facet:
   - Iran
+  geo_srpt: 'ENVELOPE(44.031891, 63.3332005, 39.781676, 25.060388565)'
   subject_topic_facet:
   - Political science
   - Iranians
@@ -1917,6 +1925,7 @@
   - "ביטוח וביטחון סוציאלי"
   subject_geo_facet:
   - Israel
+  geo_srpt: 'ENVELOPE(34.2672578, 35.6699225, 33.290743, 29.481163492)'
   subject_topic_facet:
   - Insurance
   - Social security
@@ -2050,6 +2059,7 @@
   subject_geo_facet:
   - New Jersey
   - Bridgeton
+  geo_srpt: 'ENVELOPE(-75.253033, -75.20384, 39.455303, 39.402758)'
   subject_topic_facet:
   - Strong Medicine, 1922-
   - Delaware women
@@ -2154,6 +2164,7 @@
   - '8186470336'
   subject_geo_facet:
   - India
+  geo_srpt: 'ENVELOPE(68.162429718, 97.176678, 33.232855536, 8.073694229)'
   subject_topic_facet:
   - Padma Sambhava, ca. 717-ca. 762
   - Priests, Buddhist
@@ -2399,6 +2410,7 @@
   - Rgyal rabs dris lan brgya pa rab gsal śel gyi me loṅ
   subject_geo_facet:
   - Tibet (China)
+  geo_srpt: 'ENVELOPE(78.3809827075, 99.108813918, 36.4548294134, 27.3123852325)'
   author_addl_t:
   - Rnam-rgyal Grwa-tshaṅ.
   lc_alpha_facet:
@@ -2471,6 +2483,7 @@
   - China
   - Tibet
   - India
+  geo_srpt: 'ENVELOPE(78.3809827075, 99.108813918, 36.4548294134, 27.3123852325)'
   subject_topic_facet:
   - Education and state
   - Tibetans
@@ -2495,6 +2508,7 @@
   - '4588460056'
   subject_geo_facet:
   - Japan
+  geo_srpt: 'ENVELOPE(122.934585571, 153.987060547, 45.522888184, 20.422889709)'
   subject_topic_facet:
   - Kubo, Sakae, 1901-1958
   - Japanese drama
@@ -2605,6 +2619,7 @@
   - Economic history
   - World politics
   - Hong Kong (China)
+  geo_srpt: 'ENVELOPE(113.83277904, 114.44125356, 22.561907333, 22.1519718)'
   lc_alpha_facet:
   - HC
   title_series_t:
