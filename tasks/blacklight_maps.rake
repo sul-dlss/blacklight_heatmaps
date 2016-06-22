@@ -1,3 +1,5 @@
+# Tasks used within the development of BlacklightMaps
+
 require 'solr_wrapper'
 require 'engine_cart/rake_task'
 
@@ -5,12 +7,12 @@ EngineCart.fingerprint_proc = EngineCart.rails_fingerprint_proc
 
 desc 'Run test suite'
 task ci: ['blacklight_maps:generate'] do
-  SolrWrapper.wrap do |solr|
+  SolrWrapper.wrap(port: '8888') do |solr|
     solr.with_collection(name: 'blacklight-core', dir: File.join(File.expand_path('..', File.dirname(__FILE__)), 'solr', 'conf')) do
       within_test_app do
-        # system 'RAILS_ENV=test rake blacklight:index:seed'
+        system 'RAILS_ENV=test rake blacklight_maps:index:seed'
       end
-      # Rake::Task['spec'].invoke
+      Rake::Task['spec'].invoke
     end
   end
 end
@@ -32,9 +34,9 @@ namespace :blacklight_maps do
 
     SolrWrapper.wrap(port: '8983') do |solr|
       solr.with_collection(name: 'blacklight-core', dir: File.join(File.expand_path('..', File.dirname(__FILE__)), 'solr', 'conf')) do
-        # Rake::Task['blacklight:internal:seed'].invoke
 
         within_test_app do
+          system 'RAILS_ENV=development rake blacklight_maps:index:seed'
           system "bundle exec rails s #{args[:rails_server_args]}"
         end
       end

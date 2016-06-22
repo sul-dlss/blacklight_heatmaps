@@ -6,7 +6,7 @@ end
 
 Bundler::GemHelper.install_tasks
 
-load 'tasks/blacklight_maps_tasks.rake'
+load 'tasks/blacklight_maps.rake'
 
 require 'engine_cart/rake_task'
 
