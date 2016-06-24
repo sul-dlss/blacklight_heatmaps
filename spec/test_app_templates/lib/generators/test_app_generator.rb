@@ -4,7 +4,11 @@ class TestAppGenerator < Rails::Generators::Base
   source_root './spec/test_app_templates'
 
   def add_gems
-    gem 'blacklight', '~> 6.0'
+    # Blacklight should be listed before BlacklightMaps in the Gemfile
+    inject_into_file 'Gemfile', before: "gem 'blacklight_maps'" do
+      "\ngem 'blacklight', '~> 6.0'\n"
+    end
+
     Bundler.with_clean_env do
       run 'bundle install'
     end
