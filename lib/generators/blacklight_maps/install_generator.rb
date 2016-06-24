@@ -19,6 +19,7 @@ module BlacklightMaps
         "\n    config.geometry_field = :geo_srpt" \
         "\n    config.basemap = 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'" \
         "\n    config.show.partials.insert(1, :show_leaflet_map)" \
+        "\n    config.view.maps.partials = []" \
         "\n"
       end
     end

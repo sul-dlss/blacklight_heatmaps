@@ -3,3 +3,11 @@
 .blacklight-maps-show-map {
   height: 500px;
 }
+
+.blacklight-maps-index-map {
+  height: 500px;
+}
+
+.view-icon-maps {
+  &:before { content: "\e135"; } 
+}

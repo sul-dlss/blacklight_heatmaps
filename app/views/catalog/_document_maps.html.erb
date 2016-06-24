@@ -1,0 +1,4 @@
+<div class='blacklight-maps-index-map-container'>
+  <%= content_tag(:div, nil, class: 'blacklight-maps-index-map', id: "index-map", data: {index_map: true, basemap: blacklight_config.basemap, search_url: request.url, geometry_field: blacklight_config.geometry_field}) do %>
+  <% end %>
+</div>
