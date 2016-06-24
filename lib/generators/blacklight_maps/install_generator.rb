@@ -28,5 +28,11 @@ module BlacklightMaps
         "\n  include BlacklightMaps::GeometrySolrDocument\n"
       end
     end
+
+    def inject_search_builder
+      inject_into_file 'app/models/search_builder.rb', after: /include Blacklight::Solr::SearchBuilderBehavior.*$/ do
+        "\n  include BlacklightMaps::SolrFacetHeatmapBehavior\n"
+      end
+    end
   end
 end
