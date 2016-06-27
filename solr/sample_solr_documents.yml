@@ -1,4 +1,12 @@
 ---
+- id: 34860108
+  title_display: Gone with the Wind
+  author_display: Mitchell, Margaret, 1900-1949
+  geo_srpt: -84.423137 33.762672
+- id: 34860104
+  title_display: Of mice and men
+  author_display: Steinbeck, John, 1902-1968
+  geo_srpt: -121.631609 36.688128
 - lc_1letter_facet:
   - P - Language & Literature
   author_t:
