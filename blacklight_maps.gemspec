@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '~> 4.2.6'
   s.add_dependency 'blacklight', '~> 6.0'
   s.add_dependency 'leaflet-rails'
+  s.add_dependency 'leaflet-sidebar-rails', '~> 0.1.9'
 
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails', '>=3.4', '< 4'
