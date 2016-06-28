@@ -9,7 +9,7 @@ require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist
 
 require 'blacklight'
-require 'blacklight_maps'
+require 'blacklight_heatmaps'
 
 RSpec.configure do |c|
   c.infer_spec_type_from_file_location!
