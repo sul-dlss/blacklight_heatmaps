@@ -13,5 +13,6 @@ describe 'catalog/_document_maps.html.erb' do
     expect(rendered).to have_css '[data-index-map="true"]'
     expect(rendered).to have_css '[data-search-url="http://test.host"]'
     expect(rendered).to have_css '[data-geometry-field="geo_srpt"]'
+    expect(rendered).to have_css '#index-map-sidebar'
   end
 end

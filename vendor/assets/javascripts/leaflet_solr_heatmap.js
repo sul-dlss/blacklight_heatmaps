@@ -309,6 +309,7 @@ L.SolrHeatmap = L.GeoJSON.extend({
         _this.docsCount = data.response.numFound;
         _this.renderStart = Date.now();
         _this._computeHeatmapObject(data);
+        _this.fireEvent('dataAdded', data);
       }
     });
   },
