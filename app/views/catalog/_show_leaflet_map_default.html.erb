@@ -1,5 +1,5 @@
 <% features = document.to_geojson(blacklight_config) %>
 
 <% unless features.nil? %>
-  <%= content_tag(:div, nil, class: 'blacklight-maps-show-map', id: "map-#{document.id}", data: {show_map: true, features: features, basemap: blacklight_config.basemap}) %>
+  <%= content_tag(:div, nil, class: 'blacklight-heatmaps-show-map', id: "map-#{document.id}", data: {show_map: true, features: features, basemap: blacklight_config.basemap}) %>
 <% end %>

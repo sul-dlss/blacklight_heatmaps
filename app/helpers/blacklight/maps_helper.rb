@@ -4,7 +4,7 @@ module Blacklight
       content_tag(
         :div,
         nil,
-        class: 'blacklight-maps-index-map',
+        class: 'blacklight-heatmaps-index-map',
         id: 'index-map',
         data: {
           index_map: true,

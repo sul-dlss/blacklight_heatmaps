@@ -4,8 +4,8 @@ class TestAppGenerator < Rails::Generators::Base
   source_root './spec/test_app_templates'
 
   def add_gems
-    # Blacklight should be listed before BlacklightMaps in the Gemfile
-    inject_into_file 'Gemfile', before: "gem 'blacklight_maps'" do
+    # Blacklight should be listed before BlacklightHeatmaps in the Gemfile
+    inject_into_file 'Gemfile', before: "gem 'blacklight_heatmaps'" do
       "\ngem 'blacklight', '~> 6.0'\n"
     end
 
@@ -25,6 +25,6 @@ class TestAppGenerator < Rails::Generators::Base
   # after setting up the application
 
   def install_engine
-    generate 'blacklight_maps:install'
+    generate 'blacklight_heatmaps:install'
   end
 end

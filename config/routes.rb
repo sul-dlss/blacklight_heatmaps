@@ -1,2 +1,2 @@
-BlacklightMaps::Engine.routes.draw do
+BlacklightHeatmaps::Engine.routes.draw do
 end
