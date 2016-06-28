@@ -1,20 +1,20 @@
 #!/usr/bin/env ruby
-
-# TODO: Needs MAJOR cleanup
-
+#
+# Usage: ruby scripts/sample_whosonfirst.rb [n]
+#
 require 'open-uri'
 require 'json'
 require 'yaml'
 
-class SampleWhosonfirst
+class Place
   # https://whosonfirst.mapzen.com/spelunker/random
   # Redirects to an HTML page with the following GeoJSON link:
   #   <a href="/data/722/781/341/722781341.geojson" target="data">Raw data (GeoJSON)</a>
-  def self.random_place
+  def self.random
     open('https://whosonfirst.mapzen.com/spelunker/random') do |f|
       html = f.read
       if html =~ /\<a href="(\/data\/\d+\/\d+\/\d+\/\d+\.geojson)" target="data"/
-        return JSON.parse(open('https://whosonfirst.mapzen.com' + Regexp.last_match(1)).read)
+        return self.new(JSON.parse(open('https://whosonfirst.mapzen.com' + Regexp.last_match(1)).read))
       end
     end
     nil
@@ -22,12 +22,18 @@ class SampleWhosonfirst
     nil
   end
 
-  def self.to_solr(place)
+  attr_reader :place
+  def initialize(place)
+    @place = place
+  end
+
+  def to_solr
     doc = {}
     return doc if place.nil?
     props = place['properties']
     # puts place.to_yaml
 
+    fail if place['id'].nil?
     doc['id'] = place['id']
 
     doc['title_display'] = props['wof:name']
@@ -54,10 +60,26 @@ class SampleWhosonfirst
   end
 end
 
-(ARGV.first || 1).to_i.times do |i|
-  puts SampleWhosonfirst.to_solr(SampleWhosonfirst.random_place).to_yaml
+class SampleWhosonfirst
+  def self.cli(args)
+    places = []
+    (args.first || 1).to_i.times do |i|
+      begin
+        place = Place.random
+        $stderr.puts "Found place #{i+1}: #{place.place['properties']['wof:name']} at #{place.to_solr['geo_srpt']}" if $verbose
+        places << place
+      rescue NoMethodError, RuntimeError # sometimes spelunker random feature barfs with nil
+        retry
+      end
+    end
+    puts places.map(&:to_solr).to_yaml
+  end
 end
 
+# __MAIN__
+$verbose = true
+SampleWhosonfirst.cli(ARGV)
+
 # Some good sample data:
-# puts SampleWhosonfirst.to_solr(JSON.parse(open('https://whosonfirst.mapzen.com/data/101/720/229/101720229.geojson').read)).to_yaml
-# puts SampleWhosonfirst.to_solr(JSON.parse(open('https://whosonfirst.mapzen.com/data/639/115/859/639115859.geojson').read)).to_yaml
+# puts Place.new(JSON.parse(open('https://whosonfirst.mapzen.com/data/101/720/229/101720229.geojson').read)).to_solr.to_yaml
+# puts Place.new(JSON.parse(open('https://whosonfirst.mapzen.com/data/639/115/859/639115859.geojson').read)).to_solr.to_yaml
