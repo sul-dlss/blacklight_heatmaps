@@ -33,7 +33,7 @@ class Place
     props = place['properties']
     # puts place.to_yaml
 
-    fail if place['id'].nil?
+    fail 'Missing ID' if place['id'].to_s.empty? # spelunker sometimes is missing an ID value -- dunno why
     doc['id'] = place['id']
 
     doc['title_display'] = props['wof:name']
