@@ -235,7 +235,7 @@ L.SolrHeatmap = L.GeoJSON.extend({
 
     var series = new geostats(sampled_array);
     var scale = _this.options.colors; 
-    var classifications = series.getClassJenks(howMany);
+    var classifications = series.getClassJenks(howMany - 1);
     return Array.from(new Set(classifications));
   },
 
