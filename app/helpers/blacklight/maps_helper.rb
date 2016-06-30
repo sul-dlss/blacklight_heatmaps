@@ -1,18 +1,15 @@
 module Blacklight
   module MapsHelper
+    ##
+    # Creates a div with needed attributes, used to display the index map
+    # @return String
     def index_map_div
       content_tag(
         :div,
         nil,
         class: 'blacklight-heatmaps-index-map',
         id: 'index-map',
-        data: {
-          index_map: true,
-          basemap: blacklight_config.basemap,
-          search_url: request.url,
-          geometry_field: blacklight_config.geometry_field,
-          sidebar_template: sidebar_template
-        }
+        data: index_map_data_attributes
       )
     end
 
@@ -22,7 +19,7 @@ module Blacklight
     # e.g. {title_display}
     # @return String
     def sidebar_template
-      <<-HTML
+      <<-HTMLTEMPLATE
       <div class='media'>
         <div class='media-body'>
           <h3 class='media-heading'>
@@ -32,13 +29,30 @@ module Blacklight
           </h3>
         </div>
       </div>
-      HTML
+      HTMLTEMPLATE
     end
 
     private
 
+    ##
+    # Document path used for creating client side links to documents from a
+    # template
+    # @return String
     def document_path
       "#{search_catalog_path}/{#{blacklight_config.document_unique_id_param}}"
+    end
+
+    ##
+    # Data attributes used in displaying the index map
+    # @return Hash
+    def index_map_data_attributes
+      {
+        index_map: true,
+        basemap: blacklight_config.basemap,
+        search_url: request.url,
+        geometry_field: blacklight_config.geometry_field,
+        sidebar_template: sidebar_template
+      }
     end
   end
 end
