@@ -57,6 +57,10 @@ Blacklight.onLoad(function () {
           sidebar.setContent(html);
         }
       });
+
+      $(document).on('turbolinks:click', function (e) {
+        e.preventDefault();
+      });
     },
   });
 
