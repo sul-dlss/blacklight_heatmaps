@@ -13,6 +13,7 @@ Blacklight.onLoad(function () {
     options: {},
 
     initialize: function (el, options) {
+      var _this = this;
       var $el = $(el);
       var requestUrl = $el.data().searchUrl + '&format=json';
       var geometryField = $el.data().geometryField;
@@ -55,12 +56,27 @@ Blacklight.onLoad(function () {
           });
 
           sidebar.setContent(html);
+
+          var docCount = e.response.pages.total_count;
+          $('#sortAndPerPage .page_links').html(
+            parseInt(docCount).toLocaleString() + ' ' +
+            _this.pluralize(docCount, 'item') + ' found'
+          );
         }
       });
 
       $(document).on('turbolinks:click', function (e) {
         e.preventDefault();
       });
+    },
+
+    pluralize: function (count, word) {
+      switch (count) {
+        case 1:
+          return word;
+        default:
+          return word + 's';
+      }
     },
   });
 
