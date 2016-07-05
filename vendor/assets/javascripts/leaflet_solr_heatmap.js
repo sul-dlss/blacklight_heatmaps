@@ -4,19 +4,20 @@ L.SolrHeatmap = L.GeoJSON.extend({
     type: 'geojsonGrid',
     colors: ['#f1eef6', '#d7b5d8', '#df65b0', '#dd1c77', '#980043'],
     maxSampleSize: Number.MAX_SAFE_INTEGER,  // for Jenks classification
-    logging: false
+    logging: false,
   },
 
-  initialize: function(url, options) {
+  initialize: function (url, options) {
     var _this = this;
     options = L.setOptions(_this, options);
     _this._solrUrl = url;
     _this._layers = {};
     _this._getData();
   },
-  
+
   onAdd: function (map) {
     var _this = this;
+
     // Call the parent function
     L.GeoJSON.prototype.onAdd.call(_this, map);
 
@@ -25,13 +26,13 @@ L.SolrHeatmap = L.GeoJSON.extend({
     });
   },
 
-  _computeHeatmapObject: function(data) {
+  _computeHeatmapObject: function (data) {
     var _this = this;
     _this.facetHeatmap = {},
       facetHeatmapArray = data.response.facet_heatmaps[this.options.field];
 
     // Convert array to an object
-    $.each(facetHeatmapArray, function(index, value) {
+    $.each(facetHeatmapArray, function (index, value) {
       if ((index + 1) % 2 !== 0) {
         // Set object keys for even items
         _this.facetHeatmap[value] = '';
@@ -44,7 +45,7 @@ L.SolrHeatmap = L.GeoJSON.extend({
     this._computeIntArrays();
   },
 
-  _clearLayers: function() {
+  _clearLayers: function () {
     var _this = this;
 
     switch (_this.options.type) {
@@ -55,24 +56,24 @@ L.SolrHeatmap = L.GeoJSON.extend({
         _this.clusterMarkers.clearLayers();
         break;
       case 'heatmap':
-    _this._map.removeLayer(_this.heatmapLayer);
-    break;
+        _this._map.removeLayer(_this.heatmapLayer);
+        break;
     }
   },
 
-  _createGeojson: function() {
+  _createGeojson: function () {
     var _this = this;
     var geojson = {};
 
     geojson.type = 'FeatureCollection';
     geojson.features = [];
 
-    $.each(_this.facetHeatmap.counts_ints2D, function(row, value) {
+    $.each(_this.facetHeatmap.counts_ints2D, function (row, value) {
       if (value === null) {
         return;
       }
 
-      $.each(value, function(column, val) {
+      $.each(value, function (column, val) {
         if (val === 0) {
           return;
         }
@@ -106,34 +107,36 @@ L.SolrHeatmap = L.GeoJSON.extend({
     _this._showRenderTime();
   },
 
-  _createHeatmap: function(){
+  _createHeatmap: function () {
     var _this = this;
     var heatmapCells = [];
     var cellSize = _this._getCellSize() * .75;
-    var colors = _this.options.colors; 
+    var colors = _this.options.colors;
     var classifications = _this._getClassifications(colors.length - 1);
     var maxValue = classifications[classifications.length - 1];
     var gradient = _this._getGradient(classifications);
 
-    $.each(_this.facetHeatmap.counts_ints2D, function(row, value) {
+    $.each(_this.facetHeatmap.counts_ints2D, function (row, value) {
       if (value === null) {
         return;
       }
 
-      $.each(value, function(column, val) {
+      $.each(value, function (column, val) {
         if (val === 0) {
           return;
         }
-  var scaledValue = Math.min((val / maxValue), 1);
-  var current = [_this._minLat(row), _this._minLng(column), scaledValue];
-  heatmapCells.push(current);
-  // need to create options object to set gradient, blu, radius, max
-      })
+
+        var scaledValue = Math.min((val / maxValue), 1);
+        var current = [_this._minLat(row), _this._minLng(column), scaledValue];
+        heatmapCells.push(current);
+
+        // need to create options object to set gradient, blu, radius, max
+      });
     });
 
     // settting max due to bug
     // http://stackoverflow.com/questions/26767722/leaflet-heat-issue-with-adding-points-with-intensity
-    var options = {max: .0001, radius: cellSize, gradient: gradient};
+    var options = { max: .0001, radius: cellSize, gradient: gradient };
     var heatmapLayer = L.heatLayer(heatmapCells, options);
     heatmapLayer.addTo(_this._map);
     _this.heatmapLayer = heatmapLayer;
@@ -141,21 +144,21 @@ L.SolrHeatmap = L.GeoJSON.extend({
   },
 
   // heatmap display need hash of scaled counts value, color pairs
-  _getGradient: function (classifications){
+  _getGradient: function (classifications) {
     var gradient = {};
     var maxValue = classifications[classifications.length - 1];
     var colors = _this.options.colors; 
     // skip first lower bound, assumed to be 0 from Jenks
-    for (var i = 1 ; i < classifications.length ; i++)
+    for (var i = 1; i < classifications.length; i++)
   gradient[classifications[i] / maxValue] = colors[i];
     return gradient;
   },
 
   // compute size of heatmap cells in pixels
-  _getCellSize: function(){
+  _getCellSize: function () {
     _this = this;
     var mapSize = _this._map.getSize();  // should't we use solr returned map extent?
-    var widthInPixels = mapSize.x; 
+    var widthInPixels = mapSize.x;
     var heightInPixels = mapSize.y;
     var heatmapRows = _this.facetHeatmap.rows;
     var heatmapColumns = _this.facetHeatmap.columns;
@@ -163,12 +166,12 @@ L.SolrHeatmap = L.GeoJSON.extend({
     var sizeY = heightInPixels / heatmapRows;
     var size = Math.ceil(Math.max(sizeX, sizeY));
     return size;
-},
+  },
 
-  _showRenderTime: function() {
+  _showRenderTime: function () {
     if (this.options.logging) {
-      var _this = this,
-        renderTime = 'Render time: ' + (Date.now() - _this.renderStart) + ' ms';
+      var _this = this;
+      var renderTime = 'Render time: ' + (Date.now() - _this.renderStart) + ' ms';
       console.log(renderTime);
     }
   },
@@ -177,25 +180,25 @@ L.SolrHeatmap = L.GeoJSON.extend({
     var _this = this;
 
     _this.clusterMarkers = new L.MarkerClusterGroup({
-      maxClusterRadius: 140
+      maxClusterRadius: 140,
     });
 
-    $.each(_this.facetHeatmap.counts_ints2D, function(row, value) {
+    $.each(_this.facetHeatmap.counts_ints2D, function (row, value) {
       if (value === null) {
         return;
       }
 
-      $.each(value, function(column, val) {
+      $.each(value, function (column, val) {
         if (val === 0) {
           return;
         }
 
         var bounds = new L.latLngBounds([
           [_this._minLat(row), _this._minLng(column)],
-          [_this._maxLat(row), _this._maxLng(column)]
+          [_this._maxLat(row), _this._maxLng(column)],
         ]);
         _this.clusterMarkers.addLayer(new L.Marker(bounds.getCenter(), {
-          count: val
+          count: val,
         }).bindPopup(val.toString()));
       });
     });
@@ -204,7 +207,7 @@ L.SolrHeatmap = L.GeoJSON.extend({
     _this._showRenderTime();
   },
 
-  _computeIntArrays: function() {
+  _computeIntArrays: function () {
     var _this = this;
 
     _this.lengthX = (_this.facetHeatmap.maxX - _this.facetHeatmap.minX) / _this.facetHeatmap.columns;
@@ -223,82 +226,85 @@ L.SolrHeatmap = L.GeoJSON.extend({
     }
   },
 
-  _getClassifications: function(howMany)
-  {
+  _getClassifications: function (howMany) {
     var _this = this;
-    var one_d_array = [];
-    for(var i = 0; i < _this.facetHeatmap.counts_ints2D.length; i++) {
-  if (_this.facetHeatmap.counts_ints2D[i] != null)
-      one_d_array = one_d_array.concat(_this.facetHeatmap.counts_ints2D[i]);
+    var oneDArray = [];
+    for (var i = 0; i < _this.facetHeatmap.counts_ints2D.length; i++) {
+      if (_this.facetHeatmap.counts_ints2D[i] != null) {
+        oneDArray = oneDArray.concat(_this.facetHeatmap.counts_ints2D[i]);
+      }
     }
-    var sampled_array = _this._sampleCounts(one_d_array);
 
-    var series = new geostats(sampled_array);
-    var scale = _this.options.colors; 
+    var sampledArray = _this._sampleCounts(oneDArray);
+
+    var series = new geostats(sampledArray);
+    var scale = _this.options.colors;
     var classifications = series.getClassJenks(howMany - 1);
-    return classifications.reduce(function(previous, current) {
-      if(previous.indexOf(current) == -1){
+    return classifications.reduce(function (previous, current) {
+      if (previous.indexOf(current) == -1) {
         previous.push(current);
       }
+
       return previous;
     }, []);
   },
 
-  _styleByCount: function(classifications) {
+  _styleByCount: function (classifications) {
     var _this = this;
     var scale = _this.options.colors.slice(this.options.colors.length - classifications.length, this.options.colors.length);
 
-    _this.eachLayer(function(layer) {
+    _this.eachLayer(function (layer) {
       var color;
-      $.each(classifications, function(i, val) {
+      $.each(classifications, function (i, val) {
         if (layer.feature.properties.count >= val) {
           color = scale[i];
         }
       });
+
       layer.setStyle({
         fillColor: color,
         fillOpacity: 0.5,
-        weight: 0
+        weight: 0,
       });
     });
   },
 
   // Jenks classification can be slow so we optionally sample the data
   // typically any big sample of counts are much the same, don't need to classify on all of them
-  _sampleCounts: function(passedArray)
-  {
-      _this = this;
-      if (passedArray.length <= _this.options.maxSampleSize)
-    return passedArray;   // array too small to sample
-      
-      var maxValue = Math.max.apply(Math, passedArray);
-      var sampledArray = [];
-      var period = Math.ceil(passedArray.length / _this.options.maxSampleSize);
-      for (i = 0 ; i < passedArray.length ; i = i + period)
-    sampledArray.push(passedArray[i]);
-      
-      sampledArray.push(maxValue);  // make sure largest value gets in, doesn't matter much if duplicated
-      return sampledArray
+  _sampleCounts: function (passedArray) {
+    _this = this;
+    if (passedArray.length <= _this.options.maxSampleSize) {
+      return passedArray;   // array too small to sample
+    }
+
+    var maxValue = Math.max.apply(Math, passedArray);
+    var sampledArray = [];
+    var period = Math.ceil(passedArray.length / _this.options.maxSampleSize);
+    for (i = 0; i < passedArray.length; i = i + period) {
+      sampledArray.push(passedArray[i]);
+    }
+
+    sampledArray.push(maxValue);  // make sure largest value gets in, doesn't matter much if duplicated
+    return sampledArray;
   },
 
-
-  _minLng: function(column) {
+  _minLng: function (column) {
     return this.facetHeatmap.minX + (this.lengthX * column);
   },
 
-  _minLat: function(row) {
+  _minLat: function (row) {
     return this.facetHeatmap.maxY - (this.lengthY * row) - this.lengthY;
   },
 
-  _maxLng: function(column) {
+  _maxLng: function (column) {
     return this.facetHeatmap.minX + (this.lengthX * column) + this.lengthX;
   },
 
-  _maxLat: function(row) {
+  _maxLat: function (row) {
     return this.facetHeatmap.maxY - (this.lengthY * row);
   },
 
-  _getData: function() {
+  _getData: function () {
     var _this = this;
     var startTime = Date.now();
     $.getJSON({
@@ -306,16 +312,17 @@ L.SolrHeatmap = L.GeoJSON.extend({
       data: {
         bbox: _this._mapViewToBbox(),
       },
-      success: function(data) {
+      success: function (data) {
         var totalTime = 'Solr response time: ' + (Date.now() - startTime) + ' ms';
         if (_this.options.logging) {
           console.log(totalTime);
         }
+
         _this.docsCount = data.response.numFound;
         _this.renderStart = Date.now();
         _this._computeHeatmapObject(data);
         _this.fireEvent('dataAdded', data);
-      }
+      },
     });
   },
 
@@ -323,48 +330,51 @@ L.SolrHeatmap = L.GeoJSON.extend({
     if (this._map === undefined) {
       return '-180,-90,180,90';
     }
+
     var bounds = this._map.getBounds();
     return [bounds.getWest(), bounds.getSouth(), bounds.getEast(), bounds.getNorth()].join(',');
   },
 
-  _mapViewToEnvelope: function() {
+  _mapViewToEnvelope: function () {
     if (this._map === undefined) {
       return ':"Intersects(ENVELOPE(-180, 180, 90, -90))"';
     }
+
     var bounds = this._map.getBounds();
     return ':"Intersects(ENVELOPE(' + bounds.getWest() + ', ' + bounds.getEast() + ', ' + bounds.getNorth() + ', ' + bounds.getSouth() + '))"';
   },
 
-  _mapViewToWkt: function() {
+  _mapViewToWkt: function () {
     if (this._map === undefined) {
       return '["-180 -90" TO "180 90"]';
     }
+
     var bounds = this._map.getBounds();
     return '["' + bounds.getWest() + ' ' + bounds.getSouth() + '" TO "' + bounds.getEast() + ' ' + bounds.getNorth() + '"]';
   },
 
-  _solrQuery: function() {
+  _solrQuery: function () {
     return '/' + this.options.solrRequestHandler + '?' + this.options.field;
-  }
+  },
 });
 
-L.solrHeatmap = function(url, options) {
+L.solrHeatmap = function (url, options) {
   return new L.SolrHeatmap(url, options);
 };
 
-L.LatLngBounds.prototype.getWest = function() {
+L.LatLngBounds.prototype.getWest = function () {
   var west = this._southWest.lng;
   return west < -180 ? -180 : west;
 };
 
-L.LatLngBounds.prototype.getEast = function() {
+L.LatLngBounds.prototype.getEast = function () {
   var east = this._northEast.lng;
   return east > 180 ? 180 : east;
 };
 
 // Check if L.MarkerCluster is included
 if (typeof L.MarkerCluster !== 'undefined') {
-  L.MarkerCluster.prototype.initialize = function(group, zoom, a, b) {
+  L.MarkerCluster.prototype.initialize = function (group, zoom, a, b) {
 
     L.Marker.prototype.initialize.call(this, a ? (a._cLatLng || a.getLatLng()) : new L.LatLng(0, 0), { icon: this });
 
@@ -381,6 +391,7 @@ if (typeof L.MarkerCluster !== 'undefined') {
     if (a) {
       this._addChild(a);
     }
+
     if (b) {
       this._addChild(b);
       this._childCount = b.options.count;
