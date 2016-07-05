@@ -20,6 +20,8 @@ module BlacklightHeatmaps
         "\n    config.basemap = 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'" \
         "\n    config.show.partials.insert(1, :show_leaflet_map)" \
         "\n    config.view.heatmaps.partials = []" \
+        "\n    #Heatmap color ramp. For best results, use http://colorbrewer2.org or http://tristen.ca/hcl-picker/#/hlc/5/1" \
+        "\n    config.view.heatmaps.color_ramp = ['#ffffcc', '#a1dab4', '#41b6c4', '#2c7fb8', '#253494']" \
         "\n"
       end
     end

@@ -51,7 +51,8 @@ module Blacklight
         basemap: blacklight_config.basemap,
         search_url: request.url,
         geometry_field: blacklight_config.geometry_field,
-        sidebar_template: sidebar_template
+        sidebar_template: sidebar_template,
+        color_ramp: blacklight_config.view.heatmaps.color_ramp
       }
     end
   end
