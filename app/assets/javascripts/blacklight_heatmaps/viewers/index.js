@@ -18,6 +18,7 @@ Blacklight.onLoad(function () {
       var requestUrl = $el.data().searchUrl + '&format=json';
       var geometryField = $el.data().geometryField;
       var template = $el.data().sidebarTemplate;
+      var colorRamp = $el.data().colorRamp;
 
       var map = L.map($el[0].id).setView([0, 0], 1);
       var basemap = L.tileLayer($el.data().basemap, {
@@ -27,6 +28,7 @@ Blacklight.onLoad(function () {
       var solrLayer = L.solrHeatmap(requestUrl, {
         field: geometryField,
         maxSampleSize: 50,
+        colors: colorRamp,
       }).addTo(map);
 
       var sidebar = L.control.sidebar('index-map-sidebar', {

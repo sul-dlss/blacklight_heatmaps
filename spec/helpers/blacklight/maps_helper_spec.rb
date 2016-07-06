@@ -26,6 +26,7 @@ describe Blacklight::MapsHelper do
       expect(helper.index_map_div)
         .to have_css '[data-basemap="http://www.example.com/{z}/{x}/{y}.png"]'
       expect(helper.index_map_div).to have_css '[data-sidebar-template]'
+      expect(helper.index_map_div).to have_css '[data-color-ramp]'
     end
   end
   describe '#sidebar_template' do
