@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = 'Search and view Blacklight resources on a map.'
   s.license     = 'Apache'
 
-  s.files = Dir['{app,config,db,lib}/**/*', 'LICENSE.txt', 'Rakefile', 'README.md']
+  s.files = Dir['{app,config,db,lib,vendor}/**/*', 'LICENSE.txt', 'Rakefile', 'README.md']
   s.test_files = Dir['spec/**/*']
 
   s.add_dependency 'rails', '~> 4.2.6'
