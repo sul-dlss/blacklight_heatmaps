@@ -15,10 +15,12 @@ Blacklight.onLoad(function () {
     initialize: function (el, options) {
       var _this = this;
       var $el = $(el);
-      var requestUrl = $el.data().searchUrl + '&format=json';
-      var geometryField = $el.data().geometryField;
-      var template = $el.data().sidebarTemplate;
-      var colorRamp = $el.data().colorRamp;
+      var dataAttributes = $el.data();
+      var searchSessionId = dataAttributes.searchSessionId;
+      var requestUrl = dataAttributes.searchUrl + '&format=json&session_id=' + searchSessionId;
+      var geometryField = dataAttributes.geometryField;
+      var template = dataAttributes.sidebarTemplate;
+      var colorRamp = dataAttributes.colorRamp;
 
       // Blank out page link content first and disable pagination
       $('#sortAndPerPage .page_links').html('');

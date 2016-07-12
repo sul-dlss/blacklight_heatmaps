@@ -52,7 +52,8 @@ module Blacklight
         search_url: request.url,
         geometry_field: blacklight_config.geometry_field,
         sidebar_template: sidebar_template,
-        color_ramp: blacklight_config.view.heatmaps.color_ramp
+        color_ramp: blacklight_config.view.heatmaps.color_ramp,
+        search_session_id: current_search_session.id
       }
     end
   end
