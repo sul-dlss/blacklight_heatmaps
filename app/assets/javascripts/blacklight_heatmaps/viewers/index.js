@@ -20,6 +20,10 @@ Blacklight.onLoad(function () {
       var template = $el.data().sidebarTemplate;
       var colorRamp = $el.data().colorRamp;
 
+      // Blank out page link content first and disable pagination
+      $('#sortAndPerPage .page_links').html('');
+      $('ul.pagination li').addClass('disabled');
+
       var map = L.map($el[0].id).setView([0, 0], 1);
       var basemap = L.tileLayer($el.data().basemap, {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
