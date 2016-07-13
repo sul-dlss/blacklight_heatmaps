@@ -62,6 +62,18 @@ To customize the basemap, make sure that you extend the `BlacklightHeatmaps.Base
 });
 ```
 
+### Customizing the color display
+The heatmap color ramp is also customizable. This setting can be modified in `CatalogController` by passing in an array of hexadecimal color values as strings.
+
+```ruby
+  #Heatmap color ramp. For best results, use http://colorbrewer2.org or http://tristen.ca/hcl-picker/#/hlc/5/1
+  config.view.heatmaps.color_ramp = ['#fef0d9','#fdcc8a','#fc8d59','#e34a33','#b30000']
+```
+
+![changed_ramp](https://cloud.githubusercontent.com/assets/1656824/16814655/ce3a0170-4904-11e6-8d0f-a9cfb1d44057.png)
+
+[ColorBrewer](http://colorbrewer2.org/) is a great resource in choosing a color ramp. It also has options for colorblind safe ramps to use and can export the hex values in an array that you can paste into your configuration.
+
 ## Development
 
 Run Solr and Blacklight (with BlacklightMaps) for interactive development:
