@@ -17,7 +17,8 @@ module BlacklightHeatmaps
       inject_into_file 'app/controllers/catalog_controller.rb', after: 'configure_blacklight do |config|' do
         "\n    # BlacklightHeatmaps configuration values" \
         "\n    config.geometry_field = :geo_srpt" \
-        "\n    config.basemap = 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'" \
+        "\n    # Basemaps configured include: 'positron', 'darkMatter', 'OpenStreetMap.HOT'" \
+        "\n    config.basemap_provider = 'positron'" \
         "\n    config.show.partials.insert(1, :show_leaflet_map)" \
         "\n    config.view.heatmaps.partials = []" \
         "\n    #Heatmap color ramp. For best results, use http://colorbrewer2.org or http://tristen.ca/hcl-picker/#/hlc/5/1" \

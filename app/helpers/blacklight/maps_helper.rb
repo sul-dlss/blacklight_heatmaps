@@ -48,7 +48,7 @@ module Blacklight
     def index_map_data_attributes
       {
         index_map: true,
-        basemap: blacklight_config.basemap,
+        basemap_provider: blacklight_config.basemap_provider,
         search_url: request.url,
         geometry_field: blacklight_config.geometry_field,
         sidebar_template: sidebar_template,
