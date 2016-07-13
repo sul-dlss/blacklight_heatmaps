@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Blacklight::MapsHelper do
   let(:blacklight_config) do
     Blacklight::Configuration.new(
-      basemap: 'http://www.example.com/{z}/{x}/{y}.png',
+      basemap_provider: 'positron',
       geometry_field: 'geo_srpt',
       index: Blacklight::OpenStructWithHashAccess.new(
         title_field: 'title_display'
@@ -24,7 +24,7 @@ describe Blacklight::MapsHelper do
       expect(helper.index_map_div)
         .to have_css '[data-geometry-field="geo_srpt"]'
       expect(helper.index_map_div)
-        .to have_css '[data-basemap="http://www.example.com/{z}/{x}/{y}.png"]'
+        .to have_css '[data-basemap-provider="positron"]'
       expect(helper.index_map_div).to have_css '[data-sidebar-template]'
       expect(helper.index_map_div).to have_css '[data-color-ramp]'
     end

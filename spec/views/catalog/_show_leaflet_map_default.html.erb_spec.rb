@@ -17,7 +17,7 @@ describe 'catalog/_show_leaflet_map_default.html.erb' do
              locals: { document: document, blacklight_config: blacklight_config }
       expect(rendered).to have_css '.blacklight-heatmaps-show-map'
       expect(rendered).to have_css '#map-abc123'
-      expect(rendered).to have_css '[data-basemap]'
+      expect(rendered).to have_css '[data-basemap-provider]'
       expect(rendered).to have_css '[data-show-map]'
       expect(rendered).to have_css '[data-features]'
     end

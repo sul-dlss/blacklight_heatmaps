@@ -34,12 +34,33 @@ rails generate blacklight_heatmaps:install
 
 ## Getting started
 
+### Indexing data
 BlacklightHeatmaps expects your data to be indexed as a [Spatial Recursive Prefix Tree](https://cwiki.apache.org/confluence/display/solr/Spatial+Search#SpatialSearch-RPT) type. The plugin currently supports data indexed in formats:
 
  - `x y` Syntax. example: "-121.631609 36.688128"
  - CQL ENVELOPE Syntax (`minX, maxX, maxY, minY`). example: "ENVELOPE(122.934585571, 153.987060547, 45.522888184, 20.422889709)"
 
 Additional formats could be added by extending `BlacklightHeatmaps::GeometryParser`
+
+### Customizing the basemap
+
+By default three different basemaps are included with BlacklightHeatmaps. You can modify these by changing the configuration value in the `CatalogController`.
+
+```ruby
+  # Basemaps configured include: 'positron', 'darkMatter', 'OpenStreetMap.HOT'
+  config.basemap_provider = 'OpenStreetMap.HOT'
+```
+
+BlacklightHeatmaps allows you to customize your basemap further to any Leaflet TileLayer subclass. This includes WMS layers, TileLayers, etc. Checkout [Leaflet Providers](https://github.com/leaflet-extras/leaflet-providers) for more ideas on basemaps you can use.
+
+To customize the basemap, make sure that you extend the `BlacklightHeatmaps.Basemaps` object to include your basemap selection:
+
+```javascript
+  BlacklightHeatmaps.Basemaps[' OpenStreetMap.BlackAndWhite'] = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+	maxZoom: 18,
+	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+});
+```
 
 ## Development
 
