@@ -3,7 +3,7 @@
 
   var BlacklightHeatmaps = L.Class.extend({
     statics: {
-      __version__: '0.0.2',
+      __version__: '0.0.3',
 
       selectBasemap: function (basemap) {
         if (basemap && basemap !== undefined) {
