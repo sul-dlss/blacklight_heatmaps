@@ -102,9 +102,11 @@ L.SolrHeatmap = L.GeoJSON.extend({
 
     _this.addData(geojson);
     var colors = _this.options.colors;
-    var classifications = _this._getClassifications(colors.length);
-    _this._styleByCount(classifications);
-    _this._showRenderTime();
+    if (_this.facetHeatmap.counts_ints2D && _this.facetHeatmap.counts_ints2D.length > 0) {
+      var classifications = _this._getClassifications(colors.length);
+      _this._styleByCount(classifications);
+      _this._showRenderTime();
+    }
   },
 
   _createHeatmap: function () {
@@ -229,11 +231,11 @@ L.SolrHeatmap = L.GeoJSON.extend({
   _getClassifications: function (howMany) {
     var _this = this;
     var oneDArray = [];
-    for (var i = 0; i < _this.facetHeatmap.counts_ints2D.length; i++) {
-      if (_this.facetHeatmap.counts_ints2D[i] != null) {
-        oneDArray = oneDArray.concat(_this.facetHeatmap.counts_ints2D[i]);
+    $.each(_this.facetHeatmap.counts_ints2D, function (row, value) {
+      if (value != null) {
+        oneDArray = oneDArray.concat(value);
       }
-    }
+    });
 
     var sampledArray = _this._sampleCounts(oneDArray);
 
