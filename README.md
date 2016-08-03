@@ -52,7 +52,7 @@ BlacklightHeatmaps also works with multivalued Spatial Recursive Prefix Tree typ
 }
 ```
 
-Though Solr seems to not be able to handle multivalued points without an accompanying geometry.
+Solr does not seem to be able to handle multivalued points without an accompanying geometry.
 
 Additional formats could be added by extending `BlacklightHeatmaps::GeometryParser`
 
