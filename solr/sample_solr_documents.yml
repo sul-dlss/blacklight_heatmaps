@@ -1,8 +1,15 @@
 ---
+- id: 1
+  title_display: Null Island
+  geo_srpt:
+    - ENVELOPE(-0.0005, 0.000379, 0.000309, -0.000282)
+    - 0 0
 - id: 34860108
   title_display: Gone with the Wind
   author_display: Mitchell, Margaret, 1900-1949
-  geo_srpt: -84.423137 33.762672
+  geo_srpt:
+    - ENVELOPE(-84.551068, -84.28956, 33.886823, 33.647808)
+    - -84.3752 33.5572
 - id: 34860104
   title_display: Of mice and men
   author_display: Steinbeck, John, 1902-1968

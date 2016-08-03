@@ -40,6 +40,20 @@ BlacklightHeatmaps expects your data to be indexed as a [Spatial Recursive Prefi
  - `x y` Syntax. example: "-121.631609 36.688128"
  - CQL ENVELOPE Syntax (`minX, maxX, maxY, minY`). example: "ENVELOPE(122.934585571, 153.987060547, 45.522888184, 20.422889709)"
 
+BlacklightHeatmaps also works with multivalued Spatial Recursive Prefix Tree types.
+
+```json
+{
+  "id": 1,
+  "name": "Null Island",
+  "geo_srpt": [
+    "ENVELOPE(-0.0005, 0.000379, 0.000309, -0.000282)", "0 0"
+  ]
+}
+```
+
+Though Solr seems to not be able to handle multivalued points without an accompanying geometry.
+
 Additional formats could be added by extending `BlacklightHeatmaps::GeometryParser`
 
 ### Customizing the basemap

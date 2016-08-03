@@ -15,6 +15,8 @@ EngineCart.load_application!
 
 require 'rspec/rails'
 
+Dir[Pathname.new(File.expand_path("../support/**/*.rb", __FILE__))].each { |f| require f }
+
 require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist
 

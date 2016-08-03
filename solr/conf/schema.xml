@@ -539,7 +539,7 @@
    <dynamicField name="*spell" type="textSpell" indexed="true" stored="false" multiValued="true" />
    <dynamicField name="*suggest" type="textSuggest" indexed="true" stored="false" multiValued="true" />
 
-   <dynamicField name="*_srpt" type="location_rpt" stored="true" indexed="true" />
+   <dynamicField name="*_srpt" type="location_rpt" stored="true" indexed="true" multiValued="true" />
    <dynamicField name="*_bbox" type="bbox" stored="true" indexed="true" />
 
    <!-- uncomment the following to ignore any fields that don't already match an existing 
