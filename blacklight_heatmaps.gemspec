@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib,vendor}/**/*', 'LICENSE.txt', 'Rakefile', 'README.md']
   s.test_files = Dir['spec/**/*']
 
-  s.add_dependency 'rails', '~> 4.2.6'
+  s.add_dependency 'rails', '>= 4.2', '< 6'
   s.add_dependency 'blacklight', '~> 6.0'
   s.add_dependency 'leaflet-rails'
   s.add_dependency 'leaflet-sidebar-rails', '~> 0.1.9'
