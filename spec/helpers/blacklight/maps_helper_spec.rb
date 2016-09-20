@@ -2,13 +2,12 @@ require 'spec_helper'
 
 describe Blacklight::MapsHelper do
   let(:blacklight_config) do
-    Blacklight::Configuration.new(
-      basemap_provider: 'positron',
-      geometry_field: 'geo_srpt',
-      index: Blacklight::OpenStructWithHashAccess.new(
-        title_field: 'title_display'
-      )
-    )
+    Blacklight::Configuration.new do |config|
+      config.basemap_provider = 'positron'
+      config.geometry_field = 'geo_srpt'
+      config.index.title_field = 'title_display'
+      config.view.heatmaps.color_ramp = ['#fef0d9', '#fdcc8a']
+    end
   end
   before do
     allow(helper).to receive_messages(blacklight_config: blacklight_config)
