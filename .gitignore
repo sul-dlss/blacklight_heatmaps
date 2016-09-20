@@ -8,5 +8,5 @@
 /spec/reports/
 /tmp/
 log/*.log
-
 .internal_test_app
+/spec/examples.txt

@@ -4,7 +4,11 @@ describe 'catalog/_show_leaflet_map_default.html.erb' do
   let(:document) do
     SolrDocument.new(geo_srpt: 'ENVELOPE(1,2,4,3)', id: 'abc123')
   end
-  let(:blacklight_config) { Blacklight::Configuration.new }
+  let(:blacklight_config) do
+    Blacklight::Configuration.new do |config|
+      config.basemap_provider = 'positron'
+    end
+  end
   before do
     allow(view).to receive(:document).and_return(document)
   end

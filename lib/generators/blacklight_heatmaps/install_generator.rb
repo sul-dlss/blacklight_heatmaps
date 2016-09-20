@@ -2,10 +2,6 @@ require 'rails/generators'
 
 module BlacklightHeatmaps
   class Install < Rails::Generators::Base
-    def add_gems
-      gem 'blacklight_heatmaps'
-    end
-
     source_root File.expand_path('../templates', __FILE__)
 
     def assets
