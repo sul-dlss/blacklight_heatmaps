@@ -17,14 +17,14 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib,vendor}/**/*', 'LICENSE.txt', 'Rakefile', 'README.md']
   s.test_files = Dir['spec/**/*']
 
-  s.add_dependency 'rails', '~> 4.2.6'
+  s.add_dependency 'rails', '>= 4.2.6', '< 6'
   s.add_dependency 'blacklight', '~> 6.0'
   s.add_dependency 'leaflet-rails'
   s.add_dependency 'leaflet-sidebar-rails', '~> 0.1.9'
 
   s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'rspec-rails', '>=3.4', '< 4'
-  s.add_development_dependency 'engine_cart', '~> 0.8'
+  s.add_development_dependency 'rspec-rails', '~> 3.4'
+  s.add_development_dependency 'engine_cart', '~> 1.0'
   s.add_development_dependency 'solr_wrapper'
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'poltergeist'
