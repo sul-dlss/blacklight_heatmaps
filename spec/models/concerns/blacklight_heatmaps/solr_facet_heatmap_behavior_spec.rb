@@ -32,6 +32,8 @@ describe BlacklightHeatmaps::SolrFacetHeatmapBehavior do
           .to eq :geo_srpt
         expect(subject.add_solr_facet_heatmap(solr_params)['facet.heatmap.geom'])
           .to eq '["1 2" TO "4 3"]'
+        expect(subject.add_solr_facet_heatmap(solr_params)['facet.heatmap.distErrPct'])
+          .to eq 0.15
         expect(subject.add_solr_facet_heatmap(solr_params)[:bq])
           .to include(boost: 'stuff')
         expect(subject.add_solr_facet_heatmap(solr_params)[:bq])

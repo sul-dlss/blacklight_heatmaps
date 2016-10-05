@@ -15,12 +15,17 @@ module BlacklightHeatmaps
       if blacklight_params[:bbox]
         solr_parameters['facet.heatmap'] = geometry_field
         solr_parameters['facet.heatmap.geom'] = bbox_as_range
+        solr_parameters['facet.heatmap.distErrPct'] = dist_err_pct
         solr_parameters[:bq] ||= []
         solr_parameters[:bq] << "#{geometry_field}:\"IsWithin(#{bbox_as_envelope})\""
         solr_parameters[:fq] ||= []
         solr_parameters[:fq] << "#{geometry_field}:\"Intersects(#{bbox_as_envelope})\""
       end
       solr_parameters
+    end
+
+    def dist_err_pct
+      blacklight_config.heatmap_distErrPct || 0.15
     end
 
     def geometry_field

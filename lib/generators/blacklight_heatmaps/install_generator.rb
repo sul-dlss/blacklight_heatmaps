@@ -13,6 +13,7 @@ module BlacklightHeatmaps
       inject_into_file 'app/controllers/catalog_controller.rb', after: 'configure_blacklight do |config|' do
         "\n    # BlacklightHeatmaps configuration values" \
         "\n    config.geometry_field = :geo_srpt" \
+        "\n    config.heatmap_distErrPct = 0.15 # Default Solr value" \
         "\n    # Basemaps configured include: 'positron', 'darkMatter', 'OpenStreetMap.HOT'" \
         "\n    config.basemap_provider = 'positron'" \
         "\n    config.show.partials.insert(1, :show_leaflet_map)" \
