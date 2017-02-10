@@ -21,7 +21,13 @@ Blacklight.onLoad(function () {
         $el.data().basemapProvider
       ).addTo(map);
 
-      var features = L.geoJson(features).addTo(map);
+      var features = L.geoJson(features, {
+        pointToLayer: function(feature, latlng) {
+          return L.marker(latlng, {
+            icon: BlacklightHeatmaps.Icons.default
+          })
+        }
+      }).addTo(map);
 
       map.fitBounds(features.getBounds());
     },
