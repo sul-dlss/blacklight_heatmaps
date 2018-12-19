@@ -17,8 +17,18 @@ require 'rspec/rails'
 
 Dir[Pathname.new(File.expand_path("../support/**/*.rb", __FILE__))].each { |f| require f }
 
-require 'capybara/poltergeist'
-Capybara.javascript_driver = :poltergeist
+require 'chromedriver-helper'
+require 'selenium-webdriver'
+
+Capybara.javascript_driver = :headless_chrome
+
+Capybara.register_driver :headless_chrome do |app|
+  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+    chromeOptions: { args: %w(headless disable-gpu no-sandbox disable-dev-shm-usage) }
+  )
+
+  Capybara::Selenium::Driver.new(app, browser: :chrome, desired_capabilities: capabilities)
+end
 
 require 'blacklight'
 require 'blacklight_heatmaps'
