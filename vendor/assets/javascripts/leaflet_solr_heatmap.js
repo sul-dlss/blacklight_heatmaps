@@ -28,20 +28,7 @@ L.SolrHeatmap = L.GeoJSON.extend({
 
   _computeHeatmapObject: function (data) {
     var _this = this;
-    _this.facetHeatmap = {},
-      facetHeatmapArray = data.response.facet_heatmaps[this.options.field];
-
-    // Convert array to an object
-    $.each(facetHeatmapArray, function (index, value) {
-      if ((index + 1) % 2 !== 0) {
-        // Set object keys for even items
-        _this.facetHeatmap[value] = '';
-      }else {
-        // Set object values for odd items
-        _this.facetHeatmap[facetHeatmapArray[index - 1]] = value;
-      }
-    });
-
+    _this.facetHeatmap = data.response.facet_heatmaps[this.options.field];
     this._computeIntArrays();
   },
 
