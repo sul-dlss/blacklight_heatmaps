@@ -12,5 +12,4 @@ env:
   global:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 
-before_script:
-  - jdk_switcher use oraclejdk8
+jdk: openjdk11
