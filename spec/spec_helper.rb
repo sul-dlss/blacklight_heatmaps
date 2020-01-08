@@ -17,18 +17,9 @@ require 'rspec/rails'
 
 Dir[Pathname.new(File.expand_path("../support/**/*.rb", __FILE__))].each { |f| require f }
 
-require 'chromedriver-helper'
-require 'selenium-webdriver'
+require 'webdrivers/chromedriver'
 
-Capybara.javascript_driver = :headless_chrome
-
-Capybara.register_driver :headless_chrome do |app|
-  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-    chromeOptions: { args: %w(headless disable-gpu no-sandbox disable-dev-shm-usage) }
-  )
-
-  Capybara::Selenium::Driver.new(app, browser: :chrome, desired_capabilities: capabilities)
-end
+Capybara.javascript_driver = :selenium_chrome_headless
 
 require 'blacklight'
 require 'blacklight_heatmaps'
