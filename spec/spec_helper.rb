@@ -17,8 +17,9 @@ require 'rspec/rails'
 
 Dir[Pathname.new(File.expand_path("../support/**/*.rb", __FILE__))].each { |f| require f }
 
-require 'capybara/poltergeist'
-Capybara.javascript_driver = :poltergeist
+require 'webdrivers/chromedriver'
+
+Capybara.javascript_driver = :selenium_chrome_headless
 
 require 'blacklight'
 require 'blacklight_heatmaps'
