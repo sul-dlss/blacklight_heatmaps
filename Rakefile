@@ -10,4 +10,4 @@ load 'tasks/blacklight_heatmaps.rake'
 
 require 'engine_cart/rake_task'
 
-task default: :spec
+task default: [:ci]

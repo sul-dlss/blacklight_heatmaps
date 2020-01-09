@@ -3,6 +3,7 @@
 require 'solr_wrapper'
 require 'engine_cart/rake_task'
 require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec)
 
 desc 'Run test suite'
 task ci: ['blacklight_heatmaps:generate'] do
@@ -42,5 +43,3 @@ namespace :blacklight_heatmaps do
     end
   end
 end
-
-task default: [:ci]
