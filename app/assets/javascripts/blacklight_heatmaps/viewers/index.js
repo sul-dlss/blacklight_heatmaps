@@ -21,7 +21,7 @@ Blacklight.onLoad(function () {
       var colorRamp = $el.data().colorRamp;
 
       // Blank out page link content first and disable pagination
-      $('#sortAndPerPage .page_links').html('');
+      $('#sortAndPerPage .page-links').html('');
       $('ul.pagination li').addClass('disabled');
 
       var map = L.map($el[0].id).setView([0, 0], 1);
@@ -64,7 +64,7 @@ Blacklight.onLoad(function () {
           sidebar.setContent(html);
 
           var docCount = e.response.pages.total_count;
-          $('#sortAndPerPage .page_links').html(
+          $('#sortAndPerPage .page-links').html(
             parseInt(docCount).toLocaleString() + ' ' +
             _this.pluralize(docCount, 'item') + ' found'
           );
