@@ -15,7 +15,7 @@ Blacklight.onLoad(function () {
     initialize: function (el, options) {
       var _this = this;
       var $el = $(el);
-      var requestUrl = $el.data().searchUrl + '&format=json';
+      var requestUrl = $el.data().searchUrl + '&format=heatmaps';
       var geometryField = $el.data().geometryField;
       var template = $el.data().sidebarTemplate;
       var colorRamp = $el.data().colorRamp;
