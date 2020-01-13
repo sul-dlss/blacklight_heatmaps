@@ -4,7 +4,7 @@ class TestAppGenerator < Rails::Generators::Base
   source_root './spec/test_app_templates'
 
   def add_gems
-    gem 'blacklight', '~> 6.0'
+    gem 'blacklight', '~> 7.0'
 
     Bundler.with_clean_env do
       run 'bundle install'
