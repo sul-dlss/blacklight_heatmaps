@@ -12,7 +12,7 @@ feature 'Index page map', js: true do
     expect(page).to have_css 'ul.pagination li.disabled', count: 6
 
     # Document counts
-    expect(page).to have_css '.page_links', text: '18 items found'
+    expect(page).to have_css '.page-links', text: '18 items found'
 
     expect(page).to have_css '#index-map-sidebar', visible: false
     page.first('svg g path').click

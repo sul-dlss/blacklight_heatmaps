@@ -23,8 +23,8 @@ module Blacklight
       <div class='media'>
         <div class='media-body'>
           <h3 class='media-heading'>
-            <a href=\"#{document_path}\"}>
-              {#{blacklight_config.index.title_field}}
+            <a href=\"{url}\"}>
+              {title}
             </a>
           </h3>
         </div>
@@ -33,14 +33,6 @@ module Blacklight
     end
 
     private
-
-    ##
-    # Document path used for creating client side links to documents from a
-    # template
-    # @return String
-    def document_path
-      "#{search_catalog_path}/{#{blacklight_config.document_unique_id_param}}"
-    end
 
     ##
     # Data attributes used in displaying the index map

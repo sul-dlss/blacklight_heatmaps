@@ -31,7 +31,7 @@ describe Blacklight::MapsHelper do
   describe '#sidebar_template' do
     it 'renders html template used in sidebar' do
       expect(helper.sidebar_template)
-        .to have_css '.media .media-body h3.media-heading a', text: '{title_display}'
+        .to have_css '.media .media-body h3.media-heading a', text: '{title}'
     end
   end
 end
