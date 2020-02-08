@@ -22,7 +22,11 @@ Blacklight.onLoad(function () {
 
       // Blank out page link content first and disable pagination
       $('#sortAndPerPage .page-links').html('');
-      $('ul.pagination').hide();
+      if ($('nav.pagination').length > 0) {
+        $('nav.pagination').hide();
+      } else {
+        $('ul.pagination').hide();
+      }
 
       var map = L.map($el[0].id).setView([0, 0], 1);
       var basemap = BlacklightHeatmaps.selectBasemap(

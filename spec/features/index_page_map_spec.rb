@@ -9,6 +9,7 @@ feature 'Index page map', js: true do
     expect(page).to have_css 'img[src*="/light_all/1/0/0.png"]'
 
     # Hides pagination
+    expect(page).to have_css 'nav.pagination', visible: false
     expect(page).to have_css 'ul.pagination', visible: false
 
     # Document counts
