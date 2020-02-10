@@ -1,0 +1,7 @@
+es:
+  blacklight:
+    heatmaps:
+      title: Mapa
+    search:
+      view:
+        heatmaps: Mapa
