@@ -8,8 +8,9 @@ feature 'Index page map', js: true do
     # Zoomed to world
     expect(page).to have_css 'img[src*="/light_all/1/0/0.png"]'
 
-    # Disabled pagination
-    expect(page).to have_css 'ul.pagination li.disabled', count: 6
+    # Hides pagination
+    expect(page).to have_css 'nav.pagination', visible: false
+    expect(page).to have_css 'ul.pagination', visible: false
 
     # Document counts
     expect(page).to have_css '.page-links', text: '18 items found'
