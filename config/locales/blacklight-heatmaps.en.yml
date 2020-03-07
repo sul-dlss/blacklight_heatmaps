@@ -1,0 +1,8 @@
+en:
+  blacklight:
+    heatmaps:
+      title: Map
+      aria-label: heatmap
+    search:
+      view:
+        heatmaps: Map

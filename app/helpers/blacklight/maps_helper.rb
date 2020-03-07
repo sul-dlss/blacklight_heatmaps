@@ -9,7 +9,8 @@ module Blacklight
         nil,
         class: 'blacklight-heatmaps-index-map',
         id: 'index-map',
-        data: index_map_data_attributes
+        data: index_map_data_attributes,
+        'aria-label': t('blacklight.heatmaps.aria-label')
       )
     end
 
