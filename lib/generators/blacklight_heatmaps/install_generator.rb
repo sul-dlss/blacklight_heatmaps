@@ -4,9 +4,21 @@ module BlacklightHeatmaps
   class Install < Rails::Generators::Base
     source_root File.expand_path('../templates', __FILE__)
 
-    def assets
+    def copy_styles
       copy_file 'blacklight_heatmaps.scss', 'app/assets/stylesheets/blacklight_heatmaps.scss'
-      copy_file 'blacklight_heatmaps.js', 'app/assets/javascripts/blacklight_heatmaps.js'
+    end
+
+    def inject_js
+      inject_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
+        "\n// Required by BlacklightHeatmaps" \
+        "\n//= require blacklight_heatmaps/default"
+      end
+    end
+
+    def install_webpacker
+      return unless Rails.version.to_i == 6
+
+      rake 'webpacker:install'
     end
 
     def configuration
