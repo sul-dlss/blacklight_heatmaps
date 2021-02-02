@@ -22,11 +22,7 @@ Blacklight.onLoad(function () {
 
       // Blank out page link content first and disable pagination
       $('#sortAndPerPage .page-links').html('');
-      if ($('nav.pagination').length > 0) {
-        $('nav.pagination').hide();
-      } else {
-        $('ul.pagination').hide();
-      }
+      $('ul.pagination').hide();
 
       var map = L.map($el[0].id).setView([0, 0], 1);
       var basemap = BlacklightHeatmaps.selectBasemap(
@@ -68,6 +64,7 @@ Blacklight.onLoad(function () {
           sidebar.setContent(html);
 
           var docCount = e.response.pages.total_count;
+
           $('#sortAndPerPage .page-links').html(
             parseInt(docCount).toLocaleString() + ' ' +
             _this.pluralize(docCount, 'item') + ' found'
