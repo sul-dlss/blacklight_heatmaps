@@ -17,11 +17,11 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib,vendor}/**/*', 'LICENSE.txt', 'Rakefile', 'README.md']
   s.test_files = Dir['spec/**/*']
 
-  s.add_dependency 'rails', '>= 6', '< 8'
-  s.add_dependency 'blacklight', '~> 7.0'
-  s.add_dependency 'leaflet-rails', '~> 1.2'
+  s.add_dependency 'rails', '>= 7.1.4', '< 8'
+  s.add_dependency 'sprockets-rails', '~> 3.0'
+  s.add_dependency 'blacklight', '>= 7', '< 8'
+  s.add_dependency 'leaflet-rails', '~> 1.3.0'
   s.add_dependency 'leaflet-sidebar-rails', '~> 0.2'
-
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'engine_cart', '~> 2.0'
