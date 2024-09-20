@@ -4,7 +4,6 @@ BlacklightHeatmaps.Basemaps = {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
       maxZoom: 18,
       worldCopyJump: true,
-      detectRetina: true,
     }
   ),
   positron: L.tileLayer(
@@ -12,7 +11,6 @@ BlacklightHeatmaps.Basemaps = {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
       maxZoom: 18,
       worldCopyJump: true,
-      detectRetina: true,
     }
   ),
   'OpenStreetMap.HOT': L.tileLayer(
