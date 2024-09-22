@@ -17,7 +17,7 @@ require 'rspec/rails'
 
 Dir[Pathname.new(File.expand_path("../support/**/*.rb", __FILE__))].each { |f| require f }
 
-require 'webdrivers/chromedriver'
+require 'selenium-webdriver'
 
 Capybara.javascript_driver = :selenium_chrome_headless
 
