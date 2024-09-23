@@ -15,12 +15,6 @@ module BlacklightHeatmaps
       end
     end
 
-    def install_webpacker
-      return unless Rails.version.to_i == 6
-
-      rake 'webpacker:install'
-    end
-
     def configuration
       inject_into_file 'app/controllers/catalog_controller.rb', after: 'configure_blacklight do |config|' do
         "\n    # BlacklightHeatmaps configuration values" \
