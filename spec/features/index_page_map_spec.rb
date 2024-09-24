@@ -5,8 +5,12 @@ feature 'Index page map', js: true do
     visit search_catalog_path(q: ' ', view: 'heatmaps', search_field: 'all_fields')
     expect(page).to have_css '.leaflet-map-pane'
 
-    # Zoomed to world
-    expect(page).to have_css 'img[src*="/light_all/1/0/0.png"]'
+    # Conditionally check for the PNG only on GitHub CI
+    # Leaflet chooses tile zoom based on retina; this causes tests to fail locally
+    if ENV['GITHUB_ACTIONS']
+      # Zoomed to world
+      expect(page).to have_css 'img[src*="/light_all/1/0/0.png"]'
+    end
 
     # Hides pagination
     expect(page).to have_css 'ul.pagination', visible: false
