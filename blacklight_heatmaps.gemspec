@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails', '>= 7.1.4', '< 8'
   s.add_dependency 'sprockets-rails', '~> 3.0'
-  s.add_dependency 'blacklight', '>= 7', '< 8'
+  s.add_dependency 'blacklight', '>= 7', '< 9'
   s.add_dependency 'leaflet-rails', '~> 1.3.0'
   s.add_dependency 'leaflet-sidebar-rails', '~> 0.2'
   s.add_development_dependency 'sqlite3'
