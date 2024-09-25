@@ -24,9 +24,7 @@ module BlacklightHeatmaps
         "\n    config.basemap_provider = 'positron'" \
         "\n    config.show.partials.insert(1, :show_leaflet_map)" \
         "\n    config.index.respond_to.heatmaps = true" \
-        "\n    config.view.heatmaps.partials = []" \
-        "\n    #Heatmap color ramp. For best results, use http://colorbrewer2.org or http://tristen.ca/hcl-picker/#/hlc/5/1" \
-        "\n    config.view.heatmaps.color_ramp = ['#ffffcc', '#a1dab4', '#41b6c4', '#2c7fb8', '#253494']" \
+        "\n    config.view.heatmaps(partials: [], color_ramp: ['#ffffcc', '#a1dab4', '#41b6c4', '#2c7fb8', '#253494'])" \
         "\n"
       end
     end
