@@ -55,12 +55,12 @@ L.SolrHeatmap = L.GeoJSON.extend({
     geojson.type = 'FeatureCollection';
     geojson.features = [];
 
-    $.each(_this.facetHeatmap.counts_ints2D, function (row, value) {
+    _this.facetHeatmap.counts_ints2D.forEach(function(value, row) {
       if (value === null) {
         return;
       }
 
-      $.each(value, function (column, val) {
+      value.forEach(function (val, column) {
         if (val === 0) {
           return;
         }
@@ -105,12 +105,12 @@ L.SolrHeatmap = L.GeoJSON.extend({
     var maxValue = classifications[classifications.length - 1];
     var gradient = _this._getGradient(classifications);
 
-    $.each(_this.facetHeatmap.counts_ints2D, function (row, value) {
+    _this.facetHeatmap.counts_ints2D.forEach(function(value, row) {
       if (value === null) {
         return;
       }
 
-      $.each(value, function (column, val) {
+      value.forEach(function (val, column) {
         if (val === 0) {
           return;
         }
@@ -172,12 +172,12 @@ L.SolrHeatmap = L.GeoJSON.extend({
       maxClusterRadius: 140,
     });
 
-    $.each(_this.facetHeatmap.counts_ints2D, function (row, value) {
+    _this.facetHeatmap.counts_ints2D.forEach(function(value, row) {
       if (value === null) {
         return;
       }
 
-      $.each(value, function (column, val) {
+      value.forEach(function (val, column) {
         if (val === 0) {
           return;
         }
@@ -218,7 +218,7 @@ L.SolrHeatmap = L.GeoJSON.extend({
   _getClassifications: function (howMany) {
     var _this = this;
     var oneDArray = [];
-    $.each(_this.facetHeatmap.counts_ints2D, function (row, value) {
+    _this.facetHeatmap.counts_ints2D.forEach(function(value, row) {
       if (value != null) {
         oneDArray = oneDArray.concat(value);
       }
@@ -244,7 +244,7 @@ L.SolrHeatmap = L.GeoJSON.extend({
 
     _this.eachLayer(function (layer) {
       var color;
-      $.each(classifications, function (i, val) {
+      classifications.forEach(function (val, i) {
         if (layer.feature.properties.count >= val) {
           color = scale[i];
         }
@@ -296,22 +296,26 @@ L.SolrHeatmap = L.GeoJSON.extend({
   _getData: function () {
     var _this = this;
     var startTime = Date.now();
-    $.getJSON({
-      url: _this._solrUrl,
-      data: {
-        bbox: _this._mapViewToBbox(),
-      },
-      success: function (data) {
-        var totalTime = 'Solr response time: ' + (Date.now() - startTime) + ' ms';
-        if (_this.options.logging) {
-          console.log(totalTime);
-        }
 
-        _this.docsCount = data.response.numFound;
-        _this.renderStart = Date.now();
-        _this._computeHeatmapObject(data);
-        _this.fireEvent('dataAdded', data);
-      },
+    var url = new URL(_this._solrUrl);
+    url.searchParams.append('bbox', _this._mapViewToBbox());
+
+    fetch(url, {
+      headers: {
+        'Accept': 'application/json',
+      }
+    }).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      var totalTime = 'Solr response time: ' + (Date.now() - startTime) + ' ms';
+      if (_this.options.logging) {
+        console.log(totalTime);
+      }
+
+      _this.docsCount = data.response.numFound;
+      _this.renderStart = Date.now();
+      _this._computeHeatmapObject(data);
+      _this.fireEvent('dataAdded', data);
     });
   },
 

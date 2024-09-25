@@ -1,8 +1,8 @@
 Blacklight.onLoad(function () {
   'use strict';
 
-  $('[data-index-map]').each(function () {
-    BlacklightHeatmaps.indexView(this, {});
+  document.querySelectorAll('[data-index-map]').forEach(function (el) {
+    BlacklightHeatmaps.indexView(el, {});
   });
 });
 
@@ -13,20 +13,22 @@ Blacklight.onLoad(function () {
     options: {},
 
     initialize: function (el, options) {
-      var _this = this;
-      var $el = $(el);
-      var requestUrl = $el.data().searchUrl + '&format=heatmaps';
-      var geometryField = $el.data().geometryField;
-      var template = $el.data().sidebarTemplate;
-      var colorRamp = $el.data().colorRamp;
+      var requestUrl = el.dataset.searchUrl + '&format=heatmaps';
+      var geometryField = el.dataset.geometryField;
+      var template = el.dataset.sidebarTemplate;
+      var colorRamp = JSON.parse(el.dataset.colorRamp);
 
       // Blank out page link content first and disable pagination
-      $('#sortAndPerPage .page-links').html('');
-      $('ul.pagination').hide();
+      document.querySelectorAll('#sortAndPerPage .page-links').forEach(function (links) {
+        links.innerHTML = '';
+      });
+      document.querySelectorAll('ul.pagination').forEach(function (links) {
+        links.classList.add('d-none');
+      });
 
-      var map = L.map($el[0].id).setView([0, 0], 1);
+      var map = L.map(el.id).setView([0, 0], 1);
       var basemap = BlacklightHeatmaps.selectBasemap(
-        $el.data().basemapProvider
+        el.dataset.basemapProvider
       ).addTo(map);
 
       var solrLayer = L.solrHeatmap(requestUrl, {
@@ -57,7 +59,7 @@ Blacklight.onLoad(function () {
       solrLayer.on('dataAdded', function (e) {
         if (e.response && e.response.docs) {
           var html = '';
-          $.each(e.response.docs, function (i, value) {
+          e.response.docs.forEach(function (value) {
             html += L.Util.template(template, value);
           });
 
@@ -65,15 +67,10 @@ Blacklight.onLoad(function () {
 
           var docCount = e.response.pages.total_count;
 
-          $('#sortAndPerPage .page-links').html(
-            parseInt(docCount).toLocaleString() + ' ' +
-            _this.pluralize(docCount, 'item') + ' found'
-          );
+          document.querySelectorAll('#sortAndPerPage .page-links').forEach(function (links) {
+            links.innerHTML = parseInt(docCount).toLocaleString() + ' ' + (docCount == 1 ? 'item' : 'items') + ' found';
+          });
         }
-      });
-
-      $(document).on('turbolinks:click', function (e) {
-        e.preventDefault();
       });
     },
 
