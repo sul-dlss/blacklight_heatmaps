@@ -9,12 +9,23 @@ on:
 jobs:
   tests_rails:
     runs-on: ubuntu-latest
+    name: test (ruby ${{ matrix.ruby }} / rails ${{ matrix.rails_version }} / blacklight ${{ matrix.blacklight_version }} ${{ matrix.additional_name }})
     strategy:
       matrix:
         ruby: ['3.2', '3.3']
         rails_version: ['7.1.4', '~> 7.2']
+        blacklight_version: ["~> 7.34"]
+        additional_engine_cart_rails_options: [""]
+        additional_name: ['']
+        include:
+          - rails_version: '~> 7.2'
+            ruby: 3.3
+            blacklight_version: '~> 8.0'
+            additional_engine_cart_rails_options: "-j rollup -a sprockets"
     env:
+      BLACKLIGHT_VERSION: ${{ matrix.blacklight_version }}
       RAILS_VERSION: ${{ matrix.rails_version }}
+      ENGINE_CART_RAILS_OPTIONS: "--skip-git --skip-listen --skip-spring --skip-keeps --skip-coffee --skip-test ${{ matrix.additional_engine_cart_rails_options }}"
     steps:
     - uses: actions/checkout@v4
     - name: Set up Ruby

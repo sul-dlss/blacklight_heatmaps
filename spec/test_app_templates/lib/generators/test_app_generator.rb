@@ -4,7 +4,7 @@ class TestAppGenerator < Rails::Generators::Base
   source_root './spec/test_app_templates'
 
   def add_gems
-    gem 'blacklight', '~> 7.0'
+    gem 'blacklight', ENV.fetch('BLACKLIGHT_VERSION', '~> 7.0')
 
     Bundler.with_clean_env do
       run 'bundle install'
@@ -23,5 +23,14 @@ class TestAppGenerator < Rails::Generators::Base
 
   def install_engine
     generate 'blacklight_heatmaps:install'
+  end
+
+  # Temporarily force js assets to fall back to sprockets
+  def clean_up_js_builds
+    return unless File.exist?('app/assets/builds')
+
+    append_to_file 'app/assets/config/manifest.js', "\n//= link application.js\n" if File.exist?('app/assets/config/manifest.js')
+    gsub_file 'app/assets/config/manifest.js', '//= link_tree ../builds', ''
+    remove_dir 'app/assets/builds'
   end
 end

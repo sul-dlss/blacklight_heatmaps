@@ -1,8 +1,8 @@
 Blacklight.onLoad(function () {
   'use strict';
 
-  $('[data-show-map]').each(function () {
-    BlacklightHeatmaps.showView(this);
+  document.querySelectorAll('[data-show-map]').forEach(function (el) {
+    BlacklightHeatmaps.showView(el);
   });
 });
 
@@ -13,15 +13,14 @@ Blacklight.onLoad(function () {
     options: {},
 
     initialize: function (el, options) {
-      var $el = $(el);
-      var features = $el.data().features;
+      var json = JSON.parse(el.dataset.features);
 
-      var map = L.map($el[0].id).setView([0, 0], 1);
+      var map = L.map(el.id).setView([0, 0], 1);
       var basemap = BlacklightHeatmaps.selectBasemap(
-        $el.data().basemapProvider
+        el.dataset.basemapProvider
       ).addTo(map);
 
-      var features = L.geoJson(features, {
+      var features = L.geoJson(json, {
         pointToLayer: function(feature, latlng) {
           return L.marker(latlng, {
             icon: BlacklightHeatmaps.Icons.default
