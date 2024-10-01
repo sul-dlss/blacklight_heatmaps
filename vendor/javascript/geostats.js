@@ -255,7 +255,7 @@ var geostats = function(a) {
 	
 		this.ranges = Array(); // init empty array to prevent bug when calling classification after another with less items (sample getQuantile(6) and getQuantile(4))
 		
-		for (i = 0; i < (this.bounds.length - 1); i++) {
+		for (let i = 0; i < (this.bounds.length - 1); i++) {
 			this.ranges[i] = this.bounds[i] + this.separator + this.bounds[i + 1];
 		}
 	};
@@ -787,7 +787,7 @@ var geostats = function(a) {
 		if (this._nodata())
 			return;
 		
-		dataList = this.sorted();
+		let dataList = this.sorted();
 
 		// now iterate through the datalist:
 		// determine mat1 and mat2

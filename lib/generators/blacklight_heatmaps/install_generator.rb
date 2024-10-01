@@ -2,22 +2,12 @@ require 'rails/generators'
 
 module BlacklightHeatmaps
   class Install < Rails::Generators::Base
-    source_root File.expand_path('../templates', __FILE__)
-
-    def copy_styles
-      copy_file 'blacklight_heatmaps.scss', 'app/assets/stylesheets/blacklight_heatmaps.scss'
-    end
-
-    def inject_js
-      inject_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
-        "\n// Required by BlacklightHeatmaps" \
-        "\n//= require blacklight_heatmaps/default"
-      end
-    end
+    source_root BlacklightHeatmaps::Engine.root.join("lib", "generators", "blacklight_heatmaps", "templates")
 
     def configuration
       inject_into_file 'app/controllers/catalog_controller.rb', after: 'configure_blacklight do |config|' do
         "\n    # BlacklightHeatmaps configuration values" \
+        "\n    config.application_name = 'BlacklightHeatmaps'" \
         "\n    config.geometry_field = :geo_srpt" \
         "\n    config.heatmap_distErrPct = 0.15 # Default Solr value" \
         "\n    # Basemaps configured include: 'positron', 'darkMatter', 'OpenStreetMap.HOT'" \
@@ -39,6 +29,10 @@ module BlacklightHeatmaps
       inject_into_file 'app/models/search_builder.rb', after: /include Blacklight::Solr::SearchBuilderBehavior.*$/ do
         "\n  include BlacklightHeatmaps::SolrFacetHeatmapBehavior\n"
       end
+    end
+
+    def generate_assets
+      generate "blacklight_heatmaps:assets"
     end
   end
 end

@@ -18,9 +18,8 @@ Gem::Specification.new do |s|
   s.test_files = Dir['spec/**/*']
 
   s.add_dependency 'rails', '>= 7.1.4', '< 8'
-  s.add_dependency 'blacklight', '>= 7.16', '< 9'
-  s.add_dependency 'leaflet-rails', '~> 1.3.0'
-  s.add_dependency 'leaflet-sidebar-rails', '~> 0.2'
+  s.add_dependency 'blacklight'
+
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'engine_cart', '~> 2.0'
