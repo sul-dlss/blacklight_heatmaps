@@ -2,7 +2,7 @@
   "name": "blacklight-heatmaps",
   "version": "1.4.0",
   "description": "Heatmaps for Blacklight",
-  "main": "app/javascript/blacklight_heatmaps.js",
+  "main": "app/javascript/index.js",
   "type": "module",
   "files": [
     "app/javascript/**/*.js",

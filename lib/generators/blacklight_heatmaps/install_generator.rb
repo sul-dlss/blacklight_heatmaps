@@ -2,24 +2,16 @@ require 'rails/generators'
 
 module BlacklightHeatmaps
   class Install < Rails::Generators::Base
-    source_root File.expand_path('../templates', __FILE__)
-
-    def copy_styles
-      copy_file 'blacklight_heatmaps.scss', 'app/assets/stylesheets/blacklight_heatmaps.scss'
+    source_root BlacklightHeatmaps::Engine.root.join("lib", "generators", "blacklight_heatmaps", "templates")
+      
+    def pmessage
+        puts "GENERATING IMPORTMAP INSTALL install_generator"
     end
-
-    def inject_js
-      inject_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
-        "\n// Required by BlacklightHeatmaps" \
-        "\n//= require leaflet" \
-        "\n//= require L.Control.Sidebar" \
-        "\n//= require blacklight_heatmaps/default"
-      end
-    end
-
-    def configuration
+   
+      def configuration
       inject_into_file 'app/controllers/catalog_controller.rb', after: 'configure_blacklight do |config|' do
         "\n    # BlacklightHeatmaps configuration values" \
+        "\n    config.application_name = 'BlacklightHeatmaps'" \
         "\n    config.geometry_field = :geo_srpt" \
         "\n    config.heatmap_distErrPct = 0.15 # Default Solr value" \
         "\n    # Basemaps configured include: 'positron', 'darkMatter', 'OpenStreetMap.HOT'" \
@@ -44,5 +36,21 @@ module BlacklightHeatmaps
         "\n  include BlacklightHeatmaps::SolrFacetHeatmapBehavior\n"
       end
     end
+
+    def update_blacklight_import
+      append_to_file 'app/javascript/application.js' do
+          <<~CONTENT
+            import BlacklightHeatmaps from "blacklight_heatmaps"
+          CONTENT
+        end
+    end
+
+    def insert_styles
+      append_to_file "app/assets/stylesheets/application.bootstrap.scss", <<~STYLES
+      /* Dependencies CSS */
+        @import url("https://cdn.skypack.dev/leaflet@1.9.4/dist/leaflet.css");
+      STYLES
+    end
+
   end
 end
