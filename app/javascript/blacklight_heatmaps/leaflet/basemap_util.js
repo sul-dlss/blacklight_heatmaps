@@ -1,4 +1,6 @@
-BlacklightHeatmaps.Basemaps = {
+import L from "leaflet";
+
+const basemaps = {
   darkMatter: L.tileLayer(
     'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
@@ -21,4 +23,10 @@ BlacklightHeatmaps.Basemaps = {
       maxZoom: 19,
     }
   ),
+};
+
+export const selectBasemap = (basemap) => {
+  return basemap && basemaps[basemap]
+    ? basemaps[basemap]
+    : basemaps.positron;
 };
