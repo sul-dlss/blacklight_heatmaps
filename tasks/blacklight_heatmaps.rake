@@ -5,6 +5,10 @@ require 'engine_cart/rake_task'
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec)
 
+
+# Ensure the app generates with Propshaft; sprockets is no longer supported
+ENV["ENGINE_CART_RAILS_OPTIONS"] = ENV["ENGINE_CART_RAILS_OPTIONS"].to_s + "-j importmap -a propshaft"
+
 desc 'Run test suite'
 task ci: ['blacklight_heatmaps:generate'] do
   SolrWrapper.wrap do |solr|
@@ -37,7 +41,7 @@ namespace :blacklight_heatmaps do
 
         within_test_app do
           system 'RAILS_ENV=development rake blacklight_heatmaps:index:seed'
-          system "bundle exec rails s #{args[:rails_server_args]}"
+          system "bin/dev #{args[:rails_server_args]}"
         end
       end
     end

@@ -1,0 +1,5 @@
+<% content_for(:head) do %>
+    <%= stylesheet_link_tag "blacklight_heatmaps", media: "all", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "leaflet_control_sidebar", media: "all", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "geostats", "data-turbo-track": "reload" %>
+<% end %>
