@@ -24,7 +24,9 @@ module BlacklightHeatmaps
         "\n    config.basemap_provider = 'positron'" \
         "\n    config.show.partials.insert(1, :show_leaflet_map)" \
         "\n    config.index.respond_to.heatmaps = true" \
-        "\n    config.view.heatmaps(partials: [], color_ramp: ['#ffffcc', '#a1dab4', '#41b6c4', '#2c7fb8', '#253494'])" \
+        "\n    config.view.heatmaps(partials: []," \
+        "\n                         color_ramp: ['#ffffcc', '#a1dab4', '#41b6c4', '#2c7fb8', '#253494']," \
+        "\n                         icon: BlacklightHeatmaps::Icons::HeatmapsComponent)" \
         "\n"
       end
     end
