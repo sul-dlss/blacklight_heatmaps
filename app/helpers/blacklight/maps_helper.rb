@@ -24,7 +24,7 @@ module Blacklight
       <div class='media'>
         <div class='media-body'>
           <h3 class='media-heading'>
-            <a href=\"{url}\"}>
+            <a href="{url}">
               {title}
             </a>
           </h3>
