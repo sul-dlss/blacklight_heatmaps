@@ -26,6 +26,7 @@ describe Blacklight::MapsHelper do
         .to have_css '[data-basemap-provider="positron"]'
       expect(helper.index_map_div).to have_css '[data-sidebar-template]'
       expect(helper.index_map_div).to have_css '[data-color-ramp]'
+      expect(helper.index_map_div).to have_css '[role="region"]'
       expect(helper.index_map_div).to have_css '[aria-label="heatmap"]'
     end
   end
