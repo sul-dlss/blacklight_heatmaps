@@ -10,6 +10,7 @@ module Blacklight
         class: 'blacklight-heatmaps-index-map',
         id: 'index-map',
         data: index_map_data_attributes,
+        role: 'region',
         'aria-label': t('blacklight.heatmaps.aria-label')
       )
     end
