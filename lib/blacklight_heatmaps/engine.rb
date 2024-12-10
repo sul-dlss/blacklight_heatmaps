@@ -14,5 +14,9 @@ module BlacklightHeatmaps
         end
       end
     end
+
+    initializer "blacklight_heatmaps.importmap", before: "importmap" do |app|
+      app.config.importmap.paths << Engine.root.join("config/importmap.rb") if app.config.respond_to?(:importmap)
+    end
   end
 end
