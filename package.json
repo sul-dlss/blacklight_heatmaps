@@ -1,0 +1,28 @@
+{
+  "name": "blacklight-heatmaps",
+  "version": "1.3.0",
+  "description": "Heatmaps for Blacklight",
+  "main": "app/assets/javascripts/blacklight_heatmaps/index.js",
+  "files": [
+    "app/assets/javascripts/blacklight_heatmaps/**/*.js",
+    "app/assets/stylesheets/blacklight_heatmaps/*.scss",
+    "vendor/assets/javascripts/*.js"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sul-dlss/blacklight_heatmaps.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sul-dlss/blacklight_heatmaps/issues"
+  },
+  "homepage": "https://github.com/sul-dlss/blacklight_heatmaps#readme",
+  "dependencies": {
+    "leaflet": "1.9.4",
+    "leaflet-sidebar": "0.2.4"
+  }
+}
