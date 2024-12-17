@@ -1,6 +1,6 @@
 {
   "name": "blacklight-heatmaps",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Heatmaps for Blacklight",
   "main": "app/assets/javascripts/blacklight_heatmaps/index.js",
   "files": [
