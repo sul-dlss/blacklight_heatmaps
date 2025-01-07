@@ -136,7 +136,7 @@ L.SolrHeatmap = L.GeoJSON.extend({
   _getGradient: function (classifications) {
     var gradient = {};
     var maxValue = classifications[classifications.length - 1];
-    var colors = _this.options.colors; 
+    var colors = _this.options.colors;
     // skip first lower bound, assumed to be 0 from Jenks
     for (var i = 1; i < classifications.length; i++)
   gradient[classifications[i] / maxValue] = colors[i];
@@ -145,7 +145,7 @@ L.SolrHeatmap = L.GeoJSON.extend({
 
   // compute size of heatmap cells in pixels
   _getCellSize: function () {
-    _this = this;
+    const _this = this;
     var mapSize = _this._map.getSize();  // should't we use solr returned map extent?
     var widthInPixels = mapSize.x;
     var heightInPixels = mapSize.y;
@@ -261,7 +261,7 @@ L.SolrHeatmap = L.GeoJSON.extend({
   // Jenks classification can be slow so we optionally sample the data
   // typically any big sample of counts are much the same, don't need to classify on all of them
   _sampleCounts: function (passedArray) {
-    _this = this;
+    const _this = this;
     if (passedArray.length <= _this.options.maxSampleSize) {
       return passedArray;   // array too small to sample
     }
@@ -269,7 +269,7 @@ L.SolrHeatmap = L.GeoJSON.extend({
     var maxValue = Math.max.apply(Math, passedArray);
     var sampledArray = [];
     var period = Math.ceil(passedArray.length / _this.options.maxSampleSize);
-    for (i = 0; i < passedArray.length; i = i + period) {
+    for (let i = 0; i < passedArray.length; i = i + period) {
       sampledArray.push(passedArray[i]);
     }
 
