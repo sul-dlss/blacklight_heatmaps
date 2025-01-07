@@ -101,3 +101,9 @@ Run the test suite
 ```sh
 bundle exec rake ci
 ```
+
+### Build the Javascript bundle
+After changing the source javascript in `app/javascript`, you may want to rebuild the bundled javascript by running:
+```sh
+npm run prepare
+```

@@ -11,3 +11,4 @@ log/*.log
 .internal_test_app
 /spec/examples.txt
 node_modules/
+package-lock.json

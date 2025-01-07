@@ -11,6 +11,8 @@ module BlacklightHeatmaps
     def inject_js
       inject_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
         "\n// Required by BlacklightHeatmaps" \
+        "\n//= require leaflet" \
+        "\n//= require L.Control.Sidebar" \
         "\n//= require blacklight_heatmaps/default"
       end
     end

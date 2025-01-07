@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'Show map map', js: true do
+RSpec.feature 'Show map map', js: true do
   it 'renders a leaflet map' do
     visit solr_document_path '43037890'
     expect(page).to have_css '.leaflet-map-pane'

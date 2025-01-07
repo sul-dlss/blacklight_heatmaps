@@ -1,3 +1,5 @@
+import geostats from './geostats'
+
 L.SolrHeatmap = L.GeoJSON.extend({
   options: {
     solrRequestHandler: 'select',

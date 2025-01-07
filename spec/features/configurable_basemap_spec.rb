@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'Configurable basemap', js: true do
+RSpec.feature 'Configurable basemap', js: true do
   scenario 'defaults to positron' do
     visit search_catalog_path(q: ' ', view: 'heatmaps', search_field: 'all_fields')
     expect(page).to have_css "img[src*='light_all']"
@@ -27,4 +27,3 @@ feature 'Configurable basemap', js: true do
     end
   end
 end
-
