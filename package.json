@@ -4,6 +4,7 @@
   "description": "Heatmaps for Blacklight",
   "main": "app/assets/javascripts/blacklight_heatmaps/index.js",
   "files": [
+    "app/assets/javascripts/index.js",
     "app/assets/javascripts/blacklight_heatmaps/**/*.js",
     "app/assets/stylesheets/blacklight_heatmaps/*.scss",
     "vendor/assets/javascripts/*.js"
