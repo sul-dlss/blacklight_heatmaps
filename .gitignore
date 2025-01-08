@@ -10,3 +10,4 @@
 log/*.log
 .internal_test_app
 /spec/examples.txt
+node_modules/
