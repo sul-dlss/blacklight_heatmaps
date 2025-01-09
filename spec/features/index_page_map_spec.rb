@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'Index page map', js: true do
+RSpec.feature 'Index page map', js: true do
   it 'renders a leaflet map' do
     visit search_catalog_path(q: ' ', view: 'heatmaps', search_field: 'all_fields')
     expect(page).to have_css '.leaflet-map-pane'
