@@ -1,5 +1,4 @@
 # BlacklightHeatmaps
-[![Build Status](https://travis-ci.org/sul-dlss/blacklight_heatmaps.svg?branch=master)](https://travis-ci.org/sul-dlss/blacklight_heatmaps) | [![Coverage Status](https://coveralls.io/repos/github/sul-dlss/blacklight_heatmaps/badge.svg?branch=master)](https://coveralls.io/github/sul-dlss/blacklight_heatmaps?branch=master)
 
 ![blacklight_heatmap](https://cloud.githubusercontent.com/assets/1656824/16598401/d0538fce-42cb-11e6-86f8-81fd37ab2abe.gif)
 
