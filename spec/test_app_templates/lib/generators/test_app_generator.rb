@@ -29,8 +29,10 @@ class TestAppGenerator < Rails::Generators::Base
   def clean_up_js_builds
     return unless File.exist?('app/assets/builds')
 
-    append_to_file 'app/assets/config/manifest.js', "\n//= link application.js\n" if File.exist?('app/assets/config/manifest.js')
-    gsub_file 'app/assets/config/manifest.js', '//= link_tree ../builds', ''
+    if File.exist?('app/assets/config/manifest.js')
+      append_to_file 'app/assets/config/manifest.js', "\n//= link application.js\n"
+      gsub_file 'app/assets/config/manifest.js', '//= link_tree ../builds', ''
+    end
     remove_dir 'app/assets/builds'
   end
 end
