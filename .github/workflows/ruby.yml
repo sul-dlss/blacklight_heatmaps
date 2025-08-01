@@ -14,14 +14,10 @@ jobs:
       matrix:
         ruby: ['3.2', '3.3']
         rails_version: ['~> 7.2', '~> 8.0']
-        blacklight_version: ["~> 7.34", "~> 8.0"]
-        additional_engine_cart_rails_options: [""]
+        blacklight_version: ["~> 8.0"]
+        additional_engine_cart_rails_options: [" -j importmap -a propshaft --css=bootstrap"]
         additional_name: ['']
-        include:
-          - rails_version: '~> 7.2'
-            ruby: 3.3
-            blacklight_version: '~> 8.0'
-            additional_engine_cart_rails_options: " -j importmap -a propshaft --css=bootstrap"
+
     env:
       BLACKLIGHT_VERSION: ${{ matrix.blacklight_version }}
       RAILS_VERSION: ${{ matrix.rails_version }}
