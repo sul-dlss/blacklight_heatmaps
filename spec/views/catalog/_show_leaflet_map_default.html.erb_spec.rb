@@ -30,7 +30,7 @@ describe 'catalog/_show_leaflet_map_default.html.erb' do
     it 'renders nothing' do
       render partial: 'catalog/show_leaflet_map_default',
              locals: { document: document, blacklight_config: blacklight_config }
-      expect(rendered).to eq "\n"
+      expect(rendered).to eq " \n\n"
     end
   end
 end
