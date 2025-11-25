@@ -6,7 +6,7 @@ const ESM = process.env.ESM === 'true'
 
 const fileDest = `default${ESM ? '.esm' : ''}`
 const external = [
-  'leaflet',
+  'leaflet', 'solr_heatmap', 'control_sidebar'
 ]
 const globals = {
   leaflet: 'L',
@@ -19,7 +19,7 @@ let includePathOptions = {
 };
 
 const rollupConfig = {
-  input: 'app/javascript/blacklight_heatmaps.js',
+  input: 'app/javascript/blacklight_heatmaps/index.js',
   output: {
     file: `app/assets/javascripts/blacklight_heatmaps/${fileDest}.js`,
     format: ESM ? 'es' : 'umd',

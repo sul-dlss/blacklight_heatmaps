@@ -1,5 +1,3 @@
-require 'leaflet-rails'
-require 'leaflet-sidebar-rails'
 require 'blacklight'
 
 module BlacklightHeatmaps

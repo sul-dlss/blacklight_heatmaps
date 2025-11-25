@@ -1,15 +1,21 @@
+# frozen_string_literal: true
+
 require 'rails/generators'
 
 class TestAppGenerator < Rails::Generators::Base
   source_root './spec/test_app_templates'
 
   def add_gems
-    gem 'blacklight', ENV.fetch('BLACKLIGHT_VERSION', '~> 7.0')
+    gem 'blacklight', ENV.fetch('BLACKLIGHT_VERSION', '~> 8.0')
 
-    Bundler.with_clean_env do
+    Bundler.with_unbundled_env do
       run 'bundle install'
     end
   end
+
+  # Ensure the app generates with Propshaft; sprockets is no longer supported
+  ENV['ENGINE_CART_RAILS_OPTIONS'] =
+    "#{ENV['ENGINE_CART_RAILS_OPTIONS']} -j importmap -a propshaft --css=bootstrap"
 
   def run_blacklight_generator
     say_status('warning', 'GENERATING BL', :yellow)
@@ -23,14 +29,5 @@ class TestAppGenerator < Rails::Generators::Base
 
   def install_engine
     generate 'blacklight_heatmaps:install'
-  end
-
-  # Temporarily force js assets to fall back to sprockets
-  def clean_up_js_builds
-    return unless File.exist?('app/assets/builds')
-
-    append_to_file 'app/assets/config/manifest.js', "\n//= link application.js\n" if File.exist?('app/assets/config/manifest.js')
-    gsub_file 'app/assets/config/manifest.js', '//= link_tree ../builds', ''
-    remove_dir 'app/assets/builds'
   end
 end

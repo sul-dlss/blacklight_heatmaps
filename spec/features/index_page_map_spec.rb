@@ -15,12 +15,14 @@ RSpec.feature 'Index page map', js: true do
     # Hides pagination
     expect(page).to have_css 'ul.pagination', visible: false
     expect(page).not_to have_css '.page-links a'
-
     # Document counts
     expect(page).to have_css '.page-links', text: '18 items found'
 
     expect(page).to have_css '#index-map-sidebar', visible: false
+    page.execute_script("document.querySelector('svg.leaflet-zoom-animated').style.pointerEvents = 'auto';")
+
     page.first('svg g path').click
+
     expect(page).to have_css '#index-map-sidebar', visible: true
     expect(page)
       .to have_css 'h3.media-heading a', text: '"Strong Medicine speaks"'
