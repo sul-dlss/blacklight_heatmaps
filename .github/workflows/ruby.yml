@@ -18,11 +18,11 @@ jobs:
         additional_engine_cart_rails_options: ["--css=bootstrap --js=esbuild"]
         additional_name: [""]
         include:
-          - rails_version: "7.2.2.1"
+          - rails_version: "7.2.2.2"
             ruby: 3.3
             blacklight_version: "~> 8.0"
             additional_engine_cart_rails_options: "-j rollup -a sprockets"
-          - rails_version: "7.1.5.1"
+          - rails_version: "7.1.5.2"
             ruby: 3.2
             blacklight_version: "~> 7.34"
             additional_engine_cart_rails_options: "-j rollup -a sprockets"
@@ -31,12 +31,12 @@ jobs:
       RAILS_VERSION: ${{ matrix.rails_version }}
       ENGINE_CART_RAILS_OPTIONS: "--skip-git --skip-listen --skip-spring --skip-keeps --skip-coffee --skip-test ${{ matrix.additional_engine_cart_rails_options }}"
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby }}
-      - name: Install dependencies
-        run: bundle install
-      - name: Run tests
-        run: bundle exec rake
+    - uses: actions/checkout@v6
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+    - name: Install dependencies
+      run: bundle install
+    - name: Run tests
+      run: bundle exec rake

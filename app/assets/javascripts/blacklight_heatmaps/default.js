@@ -1,6 +1,6 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('leaflet')) :
-	typeof define === 'function' && define.amd ? define(['leaflet'], factory) :
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('leaflet'), require('leaflet-sidebar')) :
+	typeof define === 'function' && define.amd ? define(['leaflet', 'leaflet-sidebar'], factory) :
 	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.BlacklightHeatmaps = factory(global.L));
 })(this, (function (L$1) { 'use strict';
 
@@ -1596,7 +1596,7 @@
 
 	  // compute size of heatmap cells in pixels
 	  _getCellSize: function () {
-	    _this = this;
+	    const _this = this;
 	    var mapSize = _this._map.getSize();  // should't we use solr returned map extent?
 	    var widthInPixels = mapSize.x;
 	    var heightInPixels = mapSize.y;
@@ -1991,14 +1991,14 @@
 	  return new ShowView(el, options);
 	};
 
-	Blacklight.onLoad(function () {
+	BlacklightHeatmaps$1.init = function () {
 	  document.querySelectorAll('[data-index-map]').forEach(function (el) {
 	    BlacklightHeatmaps$1.indexView(el, {});
 	  });
 	  document.querySelectorAll('[data-show-map]').forEach(function (el) {
 	    BlacklightHeatmaps$1.showView(el);
 	  });
-	});
+	};
 
 	return BlacklightHeatmaps$1;
 

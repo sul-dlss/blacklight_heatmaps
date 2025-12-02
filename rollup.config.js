@@ -7,6 +7,7 @@ const ESM = process.env.ESM === 'true'
 const fileDest = `default${ESM ? '.esm' : ''}`
 const external = [
   'leaflet',
+  'leaflet-sidebar',
 ]
 const globals = {
   leaflet: 'L',
