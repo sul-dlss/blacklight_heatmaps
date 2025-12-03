@@ -24,16 +24,4 @@ class TestAppGenerator < Rails::Generators::Base
   def install_engine
     generate 'blacklight_heatmaps:install', '--test'
   end
-
-  # Temporarily force js assets to fall back to sprockets
-  def clean_up_js_builds
-    return unless File.exist?('app/assets/builds')
-
-    if File.exist?('app/assets/config/manifest.js')
-      append_to_file 'app/assets/config/manifest.js', "\n//= link application.js\n"
-      append_to_file 'app/assets/config/manifest.js', "\n//= link application.css\n"
-      gsub_file 'app/assets/config/manifest.js', '//= link_tree ../builds', ''
-    end
-    remove_dir 'app/assets/builds'
-  end
 end

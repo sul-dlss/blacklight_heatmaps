@@ -6,26 +6,10 @@ module BlacklightHeatmaps
     class_option :test, type: :boolean, default: false, aliases: '-t', desc: 'Indicates that app will be installed in a test environment'
 
     def copy_styles
-      if defined?(Sprockets)
-        copy_file 'blacklight_heatmaps.scss', 'app/assets/stylesheets/blacklight_heatmaps.scss'
-      else
-        copy_file 'blacklight_heatmaps.css', 'app/assets/stylesheets/blacklight_heatmaps.css'
-      end
+      copy_file 'blacklight_heatmaps.css', 'app/assets/stylesheets/blacklight_heatmaps.css'
     end
 
-    def inject_js_sprockets
-      return unless File.exist?('app/assets/javascripts/application.js')
-
-      inject_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
-        "\n// Required by BlacklightHeatmaps" \
-        "\n//= require leaflet" \
-        "\n//= require L.Control.Sidebar" \
-        "\n//= require blacklight_heatmaps/default" \
-        "\n//= require blacklight_heatmaps/init"
-      end
-    end
-
-    def inject_js_propshaft
+    def inject_js
       return unless File.exist?('app/javascript/application.js')
 
       inject_into_file 'app/javascript/application.js' do
@@ -42,8 +26,6 @@ module BlacklightHeatmaps
     end
 
     def add_packages
-      return if defined?(Sprockets)
-
       run 'yarn add leaflet'
       run 'yarn add leaflet-sidebar@"^0.2.4"'
 
@@ -57,7 +39,7 @@ module BlacklightHeatmaps
     end
 
     def add_styles
-      return unless File.exist?('app/assets/stylesheets/application.bootstrap.scss') && defined?(Propshaft)
+      return unless File.exist?('app/assets/stylesheets/application.bootstrap.scss')
 
       append_to_file 'app/assets/stylesheets/application.bootstrap.scss' do
         <<~CONTENT

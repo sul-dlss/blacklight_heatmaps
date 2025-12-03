@@ -21,11 +21,6 @@ jobs:
           - rails_version: "7.2.2.2"
             ruby: 3.3
             blacklight_version: "~> 8.0"
-            additional_engine_cart_rails_options: "-j rollup -a sprockets"
-          - rails_version: "7.1.5.2"
-            ruby: 3.2
-            blacklight_version: "~> 7.34"
-            additional_engine_cart_rails_options: "-j rollup -a sprockets"
     env:
       BLACKLIGHT_VERSION: ${{ matrix.blacklight_version }}
       RAILS_VERSION: ${{ matrix.rails_version }}
