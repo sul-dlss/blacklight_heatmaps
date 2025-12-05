@@ -1,4 +1,5 @@
 import L from 'leaflet'
+import 'leaflet-sidebar'
 import '../../vendor/assets/javascripts/leaflet_solr_heatmap'
 import Basemaps from './basemaps'
 import Icons from './icons'
@@ -30,13 +31,13 @@ BlacklightHeatmaps.showView = function (el, options) {
   return new ShowView(el, options);
 };
 
-Blacklight.onLoad(function () {
+BlacklightHeatmaps.init = function () {
   document.querySelectorAll('[data-index-map]').forEach(function (el) {
     BlacklightHeatmaps.indexView(el, {});
   })
   document.querySelectorAll('[data-show-map]').forEach(function (el) {
     BlacklightHeatmaps.showView(el);
   });
-})
+}
 
 export default BlacklightHeatmaps;

@@ -10,6 +10,7 @@ task ci: ['blacklight_heatmaps:generate'] do
   SolrWrapper.wrap do |solr|
     solr.with_collection(name: 'blacklight-core', dir: File.join(File.expand_path('..', File.dirname(__FILE__)), 'solr', 'conf')) do
       within_test_app do
+        system 'bin/rake spec:prepare'
         system 'RAILS_ENV=test rake blacklight_heatmaps:index:seed'
       end
       Rake::Task['spec'].invoke
@@ -37,7 +38,7 @@ namespace :blacklight_heatmaps do
 
         within_test_app do
           system 'RAILS_ENV=development rake blacklight_heatmaps:index:seed'
-          system "bundle exec rails s #{args[:rails_server_args]}"
+          system 'bin/dev'
         end
       end
     end

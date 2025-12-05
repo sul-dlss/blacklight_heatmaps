@@ -1,4 +1,5 @@
 import L$1 from 'leaflet';
+import 'leaflet-sidebar';
 
 function getDefaultExportFromCjs (x) {
 	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
@@ -1592,7 +1593,7 @@ L.SolrHeatmap = L.GeoJSON.extend({
 
   // compute size of heatmap cells in pixels
   _getCellSize: function () {
-    _this = this;
+    const _this = this;
     var mapSize = _this._map.getSize();  // should't we use solr returned map extent?
     var widthInPixels = mapSize.x;
     var heightInPixels = mapSize.y;
@@ -1987,14 +1988,14 @@ BlacklightHeatmaps$1.showView = function (el, options) {
   return new ShowView(el, options);
 };
 
-Blacklight.onLoad(function () {
+BlacklightHeatmaps$1.init = function () {
   document.querySelectorAll('[data-index-map]').forEach(function (el) {
     BlacklightHeatmaps$1.indexView(el, {});
   });
   document.querySelectorAll('[data-show-map]').forEach(function (el) {
     BlacklightHeatmaps$1.showView(el);
   });
-});
+};
 
 export { BlacklightHeatmaps$1 as default };
 //# sourceMappingURL=default.esm.js.map

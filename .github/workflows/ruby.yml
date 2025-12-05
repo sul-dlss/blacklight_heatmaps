@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [main]
   pull_request:
-    branches: [ master ]
+    branches: [main]
 
 jobs:
   tests_rails:
@@ -12,16 +12,15 @@ jobs:
     name: test (ruby ${{ matrix.ruby }} / rails ${{ matrix.rails_version }} / blacklight ${{ matrix.blacklight_version }} ${{ matrix.additional_name }})
     strategy:
       matrix:
-        ruby: ['3.2', '3.3']
-        rails_version: ['7.1.4', '~> 7.2']
-        blacklight_version: ["~> 7.34"]
-        additional_engine_cart_rails_options: [""]
-        additional_name: ['']
+        ruby: ["3.3", "3.4"]
+        rails_version: ["~> 8.0"]
+        blacklight_version: ["~> 8.0"]
+        additional_engine_cart_rails_options: ["--css=bootstrap --js=esbuild"]
+        additional_name: [""]
         include:
-          - rails_version: '~> 7.2'
+          - rails_version: "7.2.2.2"
             ruby: 3.3
-            blacklight_version: '~> 8.0'
-            additional_engine_cart_rails_options: "-j rollup -a sprockets"
+            blacklight_version: "~> 8.0"
     env:
       BLACKLIGHT_VERSION: ${{ matrix.blacklight_version }}
       RAILS_VERSION: ${{ matrix.rails_version }}

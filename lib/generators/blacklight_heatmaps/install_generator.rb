@@ -2,18 +2,51 @@ require 'rails/generators'
 
 module BlacklightHeatmaps
   class Install < Rails::Generators::Base
-    source_root File.expand_path('../templates', __FILE__)
+    source_root File.expand_path('templates', __dir__)
+    class_option :test, type: :boolean, default: false, aliases: '-t', desc: 'Indicates that app will be installed in a test environment'
 
     def copy_styles
-      copy_file 'blacklight_heatmaps.scss', 'app/assets/stylesheets/blacklight_heatmaps.scss'
+      copy_file 'blacklight_heatmaps.css', 'app/assets/stylesheets/blacklight_heatmaps.css'
     end
 
     def inject_js
-      inject_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
-        "\n// Required by BlacklightHeatmaps" \
-        "\n//= require leaflet" \
-        "\n//= require L.Control.Sidebar" \
-        "\n//= require blacklight_heatmaps/default"
+      return unless File.exist?('app/javascript/application.js')
+
+      inject_into_file 'app/javascript/application.js' do
+        <<~JS
+          import BlacklightHeatmaps from 'blacklight-heatmaps/app/assets/javascripts/blacklight_heatmaps/default.esm.js'
+          window.BlacklightHeatmaps = BlacklightHeatmaps
+
+          Blacklight.onLoad(function () {
+            BlacklightHeatmaps.init()
+          })
+
+        JS
+      end
+    end
+
+    def add_packages
+      run 'yarn add leaflet'
+      run 'yarn add leaflet-sidebar@"^0.2.4"'
+
+      if ENV['CI']
+        run "yarn add file:#{BlacklightHeatmaps::Engine.root}"
+      elsif options[:test]
+        run 'yarn link "blacklight-heatmaps"'
+      else
+        run 'yarn add "blacklight-heatmaps"'
+      end
+    end
+
+    def add_styles
+      return unless File.exist?('app/assets/stylesheets/application.bootstrap.scss')
+
+      append_to_file 'app/assets/stylesheets/application.bootstrap.scss' do
+        <<~CONTENT
+          @import "leaflet/dist/leaflet";
+          @import "leaflet-sidebar/src/L.Control.Sidebar";
+          @import "./blacklight_heatmaps";
+        CONTENT
       end
     end
 
