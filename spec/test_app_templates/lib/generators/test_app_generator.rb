@@ -11,6 +11,14 @@ class TestAppGenerator < Rails::Generators::Base
     end
   end
 
+  # This makes the assets available in the test app so that changes made in
+  # local development can be picked up automatically
+  def link_frontend
+    inside('..') do
+      run 'yarn unlink ; yarn link'
+    end
+  end
+
   def run_blacklight_generator
     say_status('warning', 'GENERATING BL', :yellow)
 

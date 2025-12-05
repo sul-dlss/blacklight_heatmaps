@@ -38,7 +38,7 @@ namespace :blacklight_heatmaps do
 
         within_test_app do
           system 'RAILS_ENV=development rake blacklight_heatmaps:index:seed'
-          system "bundle exec rails s #{args[:rails_server_args]}"
+          system 'bin/dev'
         end
       end
     end
