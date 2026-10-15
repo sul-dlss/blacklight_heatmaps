@@ -18,8 +18,8 @@ jobs:
         additional_engine_cart_rails_options: ["--css=bootstrap --js=esbuild"]
         additional_name: [""]
         include:
-          - rails_version: "7.2.2.2"
-            ruby: 3.3
+          - rails_version: "8.1.4"
+            ruby: 4.0
             blacklight_version: "~> 8.0"
     env:
       BLACKLIGHT_VERSION: ${{ matrix.blacklight_version }}
