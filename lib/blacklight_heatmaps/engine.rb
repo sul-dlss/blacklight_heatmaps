@@ -7,11 +7,9 @@ module BlacklightHeatmaps
       end
 
       Mime::Type.register 'application/vnd.heatmaps+json', :heatmaps
-      if Blacklight::VERSION > '8'
-        Blacklight::Configuration.default_configuration do
-          Blacklight::Configuration.default_values[:search_state_fields] ||= []
-          Blacklight::Configuration.default_values[:search_state_fields] += %i[bbox]
-        end
+      Blacklight::Configuration.default_configuration do
+        Blacklight::Configuration.default_values[:search_state_fields] ||= []
+        Blacklight::Configuration.default_values[:search_state_fields] += %i[bbox]
       end
     end
 
