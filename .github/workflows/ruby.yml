@@ -13,14 +13,10 @@ jobs:
     strategy:
       matrix:
         ruby: ["3.3", "3.4"]
-        rails_version: ["~> 8.0"]
+        rails_version: ["~> 8.1"]
         blacklight_version: ["~> 8.0"]
         additional_engine_cart_rails_options: ["--css=bootstrap --js=esbuild"]
         additional_name: [""]
-        include:
-          - rails_version: "7.2.2.2"
-            ruby: 3.3
-            blacklight_version: "~> 8.0"
     env:
       BLACKLIGHT_VERSION: ${{ matrix.blacklight_version }}
       RAILS_VERSION: ${{ matrix.rails_version }}
