@@ -12,7 +12,7 @@ jobs:
     name: test (ruby ${{ matrix.ruby }} / rails ${{ matrix.rails_version }} / blacklight ${{ matrix.blacklight_version }} ${{ matrix.additional_name }})
     strategy:
       matrix:
-        ruby: ["3.3", "3.4"]
+        ruby: ["3.3", "3.4", "4.0"]
         rails_version: ["~> 8.1"]
         blacklight_version: ["~> 8.0"]
         additional_engine_cart_rails_options: ["--css=bootstrap --js=esbuild"]
@@ -20,7 +20,7 @@ jobs:
     env:
       BLACKLIGHT_VERSION: ${{ matrix.blacklight_version }}
       RAILS_VERSION: ${{ matrix.rails_version }}
-      ENGINE_CART_RAILS_OPTIONS: "--skip-git --skip-listen --skip-spring --skip-keeps --skip-coffee --skip-test ${{ matrix.additional_engine_cart_rails_options }}"
+      ENGINE_CART_RAILS_OPTIONS: "--skip-git --skip-listen --skip-spring --skip-keeps --skip-kamal --skip-thruster --skip-solid --skip-coffee --skip-test ${{ matrix.additional_engine_cart_rails_options }}"
     steps:
     - uses: actions/checkout@v7
     - name: Set up Ruby
