@@ -6,7 +6,7 @@ class TestAppGenerator < Rails::Generators::Base
   def add_gems
     gem 'blacklight', ENV.fetch('BLACKLIGHT_VERSION', '~> 8.0')
 
-    Bundler.with_clean_env do
+    Bundler.with_unbundled_env do
       run 'bundle install'
     end
   end
