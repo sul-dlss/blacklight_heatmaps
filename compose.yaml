@@ -1,6 +1,8 @@
 services:
   solr:
-    image: "solr:${SOLR_VERSION:-9.6.1}"
+    image: "solr:${SOLR_VERSION:-latest}"
+    environment:
+      - SOLR_MODULES=analysis-extras
     volumes:
       - ./solr/conf:/opt/solr/conf:ro
     ports:
