@@ -101,6 +101,8 @@ Run the test suite
 bundle exec rake ci
 ```
 
+Both tasks run Solr with `docker compose` (see `compose.yaml`) when Docker is available, and fall back to solr_wrapper otherwise.
+
 ### Build the Javascript bundle
 After changing the source javascript in `app/javascript`, you may want to rebuild the bundled javascript by running:
 ```sh
