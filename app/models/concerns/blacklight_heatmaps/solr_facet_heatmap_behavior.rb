@@ -12,7 +12,7 @@ module BlacklightHeatmaps
     ##
     # Add Solr spatial heatmap parameters to Solr request
     def add_solr_facet_heatmap(solr_parameters = {})
-      if blacklight_params[:bbox]
+      if search_state.params[:bbox]
         solr_parameters['facet.heatmap'] = geometry_field
         solr_parameters['facet.heatmap.geom'] = bbox_as_range
         solr_parameters['facet.heatmap.distErrPct'] = dist_err_pct
@@ -36,7 +36,7 @@ module BlacklightHeatmaps
     # `bbox` parameter is in format "west,south,east,north"
     # @return Array
     def bbox
-      blacklight_params[:bbox].split(',')
+      search_state.params[:bbox].split(',')
     end
 
     ##

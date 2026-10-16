@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib,vendor}/**/*', 'LICENSE.txt', 'Rakefile', 'README.md']
   s.test_files = Dir['spec/**/*']
 
-  s.add_dependency 'blacklight', '>= 8', '< 9'
+  s.add_dependency 'blacklight', '>= 8', '< 10'
   s.add_dependency 'rails', '>= 8.1', '< 9'
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'engine_cart', '~> 2.0'
