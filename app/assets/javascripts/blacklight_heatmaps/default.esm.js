@@ -1477,6 +1477,10 @@ L.SolrHeatmap = L.GeoJSON.extend({
   _computeHeatmapObject: function (data) {
     var _this = this;
     _this.facetHeatmap = data.response.facet_heatmaps[this.options.field];
+    // Solr returns a null grid when no documents have geometry within the bbox
+    if (!_this.facetHeatmap.counts_ints2D) {
+      _this.facetHeatmap.counts_ints2D = [];
+    }
     this._computeIntArrays();
   },
 
