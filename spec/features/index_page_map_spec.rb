@@ -25,4 +25,13 @@ RSpec.feature 'Index page map', js: true do
     expect(page)
       .to have_css 'h3.media-heading a', text: '"Strong Medicine speaks"'
   end
+
+  it 'renders an empty map when no results have geometry' do
+    visit search_catalog_path(q: '00282214', view: 'heatmaps', search_field: 'all_fields')
+    expect(page).to have_css '.leaflet-map-pane'
+
+    # Document counts are only rendered after the heatmap data is processed
+    expect(page).to have_css '.page-links', text: '0 items found'
+    expect(page).not_to have_css 'svg g path'
+  end
 end
